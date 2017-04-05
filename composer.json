@@ -1,0 +1,28 @@
+{
+    "name": "clarkeash/doorman",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ashley Clarke",
+            "email": "me@ashleyclarke.me"
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Clarkeash\\Doorman\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Clarkeash\\Doorman\\Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^3.4",
+        "phpunit/phpunit": "^6.0"
+    }
+}
