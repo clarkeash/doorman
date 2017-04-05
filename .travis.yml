@@ -15,3 +15,6 @@ install:
   - travis_retry composer install --no-interaction --prefer-dist --no-suggest
 
 script: vendor/bin/phpunit
+
+after_success:
+  - bash <(curl -s https://codecov.io/bash)
