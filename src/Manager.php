@@ -40,7 +40,7 @@ class Manager
             throw new ExpiredInviteCode;
         }
 
-        if($invite->for != $email) {
+        if(!is_null($invite->for) && $invite->for != $email) {
             throw new NotYourInviteCode;
         }
     }

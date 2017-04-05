@@ -104,6 +104,22 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      */
+    public function a_unrestricted_invite_can_be_redeemed_when_email_is_provided()
+    {
+        Invite::forceCreate([
+            'code' => 'ABCDE',
+        ]);
+
+        Doorman::redeem('ABCDE', 'me@ashleyclarke.me');
+
+        $invite = Invite::where('code', '=', 'ABCDE')->firstOrFail();
+
+        Assert::assertEquals(1, $invite->uses);
+    }
+
+    /**
+     * @test
+     */
     public function it_can_have_unlimited_redemptions()
     {
         Invite::forceCreate([
