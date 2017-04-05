@@ -1,5 +1,23 @@
 # Doorman
 
+<p align="center">
+  <a href="https://travis-ci.org/clarkeash/doorman">
+    <img src="https://img.shields.io/travis/clarkeash/doorman.svg?style=flat-square">
+  </a>
+  <a href="https://codecov.io/gh/clarkeash/doorman">
+    <img src="https://img.shields.io/codecov/c/github/clarkeash/doorman.svg?style=flat-square">
+  </a>
+  <a href="https://scrutinizer-ci.com/g/clarkeash/doorman">
+    <img src="https://img.shields.io/scrutinizer/g/clarkeash/doorman.svg?style=flat-square">
+  </a>
+  <a href="https://github.com/clarkeash/doorman/blob/master/LICENSE">
+    <img src="https://img.shields.io/github/license/clarkeash/doorman.svg?style=flat-square">
+  </a>
+  <a href="https://twitter.com/clarkeash">
+    <img src="http://img.shields.io/badge/author-@clarkeash-blue.svg?style=flat-square">
+  </a>
+</p>
+
 Doorman provides a way to limit access to your Laravel applications by using invite codes.
 
 Invite Codes:
