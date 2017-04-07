@@ -10,14 +10,19 @@ class DoormanServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/../../config/doorman.php' => config_path('doorman.php'),
+            __DIR__ . '/../../resources/config/doorman.php' => config_path('doorman.php'),
         ]);
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
     }
 
     public function register()
     {
+        $this->mergeConfigFrom(
+            __DIR__ . '/../../resources/config/doorman.php',
+            'doorman'
+        );
+
         $this->app->bind('doorman', Doorman::class);
     }
 }
