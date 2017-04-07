@@ -43,7 +43,7 @@ class Generator
      *
      * @return $this
      */
-    public function for(string $email)
+    public function for (string $email)
     {
         $this->email = $email;
 
@@ -95,7 +95,7 @@ class Generator
     {
         $invites = collect();
 
-        for($i = 0; $i < $this->amount; $i++) {
+        for ($i = 0; $i < $this->amount; $i++) {
             $invite = $this->build();
 
             $invites->push($invite);
