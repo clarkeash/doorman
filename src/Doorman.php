@@ -11,6 +11,6 @@ class Doorman
 
     public function generate()
     {
-        return (new Generator);
+        return new Generator;
     }
 }

@@ -14,6 +14,11 @@ class Generator
     protected $expiry;
 
 
+    /**
+     * @param int $amount
+     *
+     * @return $this
+     */
     public function times(int $amount = 1)
     {
         $this->amount = $amount;
@@ -21,6 +26,11 @@ class Generator
         return $this;
     }
 
+    /**
+     * @param int $amount
+     *
+     * @return $this
+     */
     public function uses(int $amount = 1)
     {
         $this->uses = $amount;
@@ -28,6 +38,11 @@ class Generator
         return $this;
     }
 
+    /**
+     * @param string $email
+     *
+     * @return $this
+     */
     public function for(string $email)
     {
         $this->email = $email;
@@ -35,6 +50,11 @@ class Generator
         return $this;
     }
 
+    /**
+     * @param \Carbon\Carbon $date
+     *
+     * @return $this
+     */
     public function expiresOn(Carbon $date)
     {
         $this->expiry = $date;
@@ -42,6 +62,11 @@ class Generator
         return $this;
     }
 
+    /**
+     * @param int $days
+     *
+     * @return $this
+     */
     public function expiresIn($days = 14)
     {
         $this->expiry = Carbon::now(config('app.timezone'))->addDays($days)->endOfDay();
@@ -49,6 +74,9 @@ class Generator
         return $this;
     }
 
+    /**
+     * @return \Clarkeash\Doorman\Models\Invite
+     */
     protected function build(): Invite
     {
         $invite = new Invite;
@@ -60,10 +88,21 @@ class Generator
         return $invite;
     }
 
+    /**
+     * @return \Illuminate\Support\Collection
+     */
     public function make()
     {
+        $invites = collect();
+
         for($i = 0; $i < $this->amount; $i++) {
-            $this->build()->save();
+            $invite = $this->build();
+
+            $invites->push($invite);
+
+            $invite->save();
         }
+
+        return $invites;
     }
 }

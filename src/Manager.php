@@ -12,7 +12,11 @@ use Illuminate\Support\Str;
 
 class Manager
 {
-    public function redeem($code, $email = null)
+    /**
+     * @param             $code
+     * @param string|null $email
+     */
+    public function redeem($code, string $email = null)
     {
         $invite = $this->lookupInvite($code);
 
@@ -21,6 +25,12 @@ class Manager
         $invite->increment('uses');
     }
 
+    /**
+     * @param $code
+     *
+     * @return \Clarkeash\Doorman\Models\Invite
+     * @throws \Clarkeash\Doorman\Exceptions\InvalidInviteCode
+     */
     protected function lookupInvite($code): Invite
     {
         try {
@@ -30,7 +40,15 @@ class Manager
         }
     }
 
-    protected function validateInvite(Invite $invite, $email = null)
+    /**
+     * @param \Clarkeash\Doorman\Models\Invite $invite
+     * @param string|null                      $email
+     *
+     * @throws \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
+     * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
+     * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
+     */
+    protected function validateInvite(Invite $invite, string $email = null)
     {
         if($invite->max != 0 && $invite->uses >= $invite->max) {
             throw new MaxUsesReached;
