@@ -50,15 +50,15 @@ class Manager
      */
     protected function validateInvite(Invite $invite, string $email = null)
     {
-        if($invite->max != 0 && $invite->uses >= $invite->max) {
+        if ($invite->max != 0 && $invite->uses >= $invite->max) {
             throw new MaxUsesReached;
         }
 
-        if(!is_null($invite->valid_until) && $invite->valid_until->isPast()) {
+        if (!is_null($invite->valid_until) && $invite->valid_until->isPast()) {
             throw new ExpiredInviteCode;
         }
 
-        if(!is_null($invite->for) && $invite->for != $email) {
+        if (!is_null($invite->for) && $invite->for != $email) {
             throw new NotYourInviteCode;
         }
     }

@@ -6,5 +6,5 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invite extends Model
 {
-    protected $dates = ['valid_until'];
+    protected $dates = [ 'valid_until' ];
 }
