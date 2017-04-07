@@ -28,7 +28,7 @@ class Generator
         return $this;
     }
 
-    public function for(string $email)
+    public function for (string $email)
     {
         $this->email = $email;
 
@@ -62,7 +62,7 @@ class Generator
 
     public function make()
     {
-        for($i = 0; $i < $this->amount; $i++) {
+        for ($i = 0; $i < $this->amount; $i++) {
             $this->build()->save();
         }
     }
