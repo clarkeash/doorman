@@ -2,6 +2,7 @@
 
 namespace Clarkeash\Doorman;
 
+use Clarkeash\Doorman\Exceptions\DoormanException;
 use Clarkeash\Doorman\Exceptions\ExpiredInviteCode;
 use Clarkeash\Doorman\Exceptions\InvalidInviteCode;
 use Clarkeash\Doorman\Exceptions\MaxUsesReached;
@@ -23,6 +24,24 @@ class Manager
         $this->validateInvite($invite, $email);
 
         $invite->increment('uses');
+    }
+
+    /**
+     * @param             $code
+     * @param string|null $email
+     *
+     * @return bool
+     */
+    public function check($code, string $email = null)
+    {
+        try {
+            $invite = $this->lookupInvite($code);
+            $this->validateInvite($invite, $email);
+
+            return true;
+        } catch (DoormanException $e) {
+            return false;
+        }
     }
 
     /**
