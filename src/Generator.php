@@ -44,7 +44,7 @@ class Generator
 
     public function expiresIn($days = 14)
     {
-        $this->expiry = Carbon::now(config('app.timezone'))->addDays($days);
+        $this->expiry = Carbon::now(config('app.timezone'))->addDays($days)->endOfDay();
 
         return $this;
     }

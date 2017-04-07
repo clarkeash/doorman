@@ -2,6 +2,7 @@
 
 namespace Clarkeash\Doorman\Test\Feature;
 
+use Carbon\Carbon;
 use Clarkeash\Doorman\Models\Invite;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
@@ -54,5 +55,45 @@ class GenerateInvitesTest extends TestCase
         $invite = Invite::first();
 
         Assert::assertEquals(10, $invite->max);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_have_an_expiry_date()
+    {
+        $date = Carbon::now( 'UTC')->endOfDay();
+
+        Doorman::generate()->expiresOn($date)->make();
+
+        $invite = Invite::first();
+
+        Assert::assertEquals($date, $invite->valid_until);
+    }
+
+    /**
+     * @test
+     */
+    public function it_has_helper_to_set_number_of_days_in_future_to_expire()
+    {
+        Doorman::generate()->expiresIn(7)->make();
+
+        $invite = Invite::first();
+
+        $date = Carbon::now('UTC')->addDays(7)->endOfDay();
+
+        Assert::assertEquals($date, $invite->valid_until);
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_be_valid_for_a_single_email()
+    {
+        Doorman::generate()->for('me@ashleyclarke.me')->make();
+
+        $invite = Invite::first();
+
+        Assert::assertEquals('me@ashleyclarke.me', $invite->for);
     }
 }
