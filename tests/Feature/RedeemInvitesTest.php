@@ -16,6 +16,7 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      * @expectedException \Clarkeash\Doorman\Exceptions\InvalidInviteCode
+     * @expectedExceptionMessage The invite code NOPE is invalid.
      */
     public function it_squawks_if_code_is_invalid()
     {
@@ -44,6 +45,7 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      * @expectedException \Clarkeash\Doorman\Exceptions\MaxUsesReached
+     * @expectedExceptionMessage The invite code ABCDE has already been used the maximum number of times.
      */
     public function it_squawks_if_maximum_uses_has_been_reached()
     {
@@ -59,6 +61,7 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      * @expectedException \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
+     * @expectedExceptionMessage The invite code ABCDE has expired.
      */
     public function it_squawks_if_code_has_expired()
     {
@@ -73,6 +76,7 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      * @expectedException \Clarkeash\Doorman\Exceptions\NotYourInviteCode
+     * @expectedExceptionMessage The invite code ABCDE belongs to another user.
      */
     public function it_squawks_if_trying_to_use_a_code_belonging_to_someone_else()
     {

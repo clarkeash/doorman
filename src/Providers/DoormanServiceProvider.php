@@ -14,6 +14,7 @@ class DoormanServiceProvider extends ServiceProvider
         ]);
 
         $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
+        $this->loadTranslationsFrom(__DIR__ . '/../../resources/translations', 'doorman');
     }
 
     public function register()

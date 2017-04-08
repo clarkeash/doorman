@@ -55,7 +55,7 @@ class Manager
         try {
             return Invite::where('code', '=', Str::upper($code))->firstOrFail();
         } catch (ModelNotFoundException $e) {
-            throw new InvalidInviteCode;
+            throw new InvalidInviteCode(trans('doorman::messages.invalid', ['code' => $code]));
         }
     }
 
@@ -70,15 +70,15 @@ class Manager
     protected function validateInvite(Invite $invite, string $email = null)
     {
         if ($invite->max != 0 && $invite->uses >= $invite->max) {
-            throw new MaxUsesReached;
+            throw new MaxUsesReached(trans('doorman::messages.maxed', ['code' => $invite->code]));
         }
 
         if (!is_null($invite->valid_until) && $invite->valid_until->isPast()) {
-            throw new ExpiredInviteCode;
+            throw new ExpiredInviteCode(trans('doorman::messages.expired', ['code' => $invite->code]));
         }
 
         if (!is_null($invite->for) && $invite->for != $email) {
-            throw new NotYourInviteCode;
+            throw new NotYourInviteCode(trans('doorman::messages.restricted', ['code' => $invite->code]));
         }
     }
 }
