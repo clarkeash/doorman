@@ -88,3 +88,30 @@ Make an invite for a specific person.
 ```php
 Doorman::generate()->for('me@ashleyclarke.me')->make();
 ```
+
+### Redeem Invites
+
+You can redeem an invite by calling the ````redeem```` method. Providing the invite code and optionally an email address.
+
+```php
+Doorman::redeem('ABCDE');
+// or
+Doorman::redeem('ABCDE', 'me@ashleyclarke.me');
+```
+
+If doorman is able to redeem the invite code it will increment the number of redemptions by 1, otherwise it will throw an exception.
+
+* ````InvalidInviteCode```` is thrown if the code does not exist in the database.
+* ````ExpiredInviteCode```` is thrown if an expiry date is set and it is in the past.
+* ````MaxUsesReached```` is thrown if the invite code has already been used the maximum number of times.
+* ````NotYourInviteCode```` is thrown if the email address for the invite does match the one provided during redemption, or one was not provided during redemption.
+
+All of the above exceptions extend ````DoormanException```` so you can catch that exception if your application does not need to do anything specific for the above exceptions.
+
+```php
+try {
+    Doorman::redeem(request()->get('code'), request()->get('email'));
+} catch (DoormanException $e) {
+    return response()->json(['error' => $e->getMessage()], 422);
+}
+```
