@@ -53,3 +53,17 @@ And, register the facade:
     'Doorman' => Clarkeash\Doorman\Facades\Doorman::class,
 ];
 ```
+
+## Usage
+
+### Generate Invites
+
+Make a single generic invite code with 1 redemption, and no expiry.
+```php
+Doorman::generate()->make();
+```
+
+Make 5 generic invite codes with 1 redemption each, and no expiry.
+```php
+Doorman::generate()->times(5)->make();
+```
