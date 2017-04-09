@@ -67,3 +67,24 @@ Make 5 generic invite codes with 1 redemption each, and no expiry.
 ```php
 Doorman::generate()->times(5)->make();
 ```
+
+Make an invite with 10 redemptions and no expiry.
+```php
+Doorman::generate()->uses(10)->make();
+```
+
+Make an invite that expires on a specific date.
+```php
+$date = Carbon::now('UTC')->addDays(7);
+Doorman::generate()->expiresOn($date)->make();
+```
+
+Make an invite that expires in 14 days.
+```php
+Doorman::generate()->expiresIn(14)->make();
+```
+
+Make an invite for a specific person.
+```php
+Doorman::generate()->for('me@ashleyclarke.me')->make();
+```
