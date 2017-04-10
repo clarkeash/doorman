@@ -54,6 +54,12 @@ And, register the facade:
 ];
 ```
 
+Finally, migrate the database:
+
+```bash
+$ php artisan migrate
+```
+
 ## Usage
 
 ### Generate Invites
