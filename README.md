@@ -122,6 +122,16 @@ try {
 }
 ```
 
+### Check Invites without redeeming them
+
+You can check an invite by calling the ````check```` method. Providing the invite code and optionally an email address. (It has the same signature as the ````redeem```` method except it will return ````true```` or ````false```` instead of throwing an exception.
+
+```php
+Doorman::check('ABCDE');
+// or
+Doorman::check('ABCDE', 'me@ashleyclarke.me');
+```
+
 ### Change Error Messages (and translation support)
 
 In order to change the error message returned from doorman, we need to publish the language files like so:
