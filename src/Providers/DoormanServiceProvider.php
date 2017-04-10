@@ -18,7 +18,7 @@ class DoormanServiceProvider extends ServiceProvider
         ], 'translations');
 
         $this->publishes([
-            __DIR__.'/../../resources/migrations' => database_path('migrations')
+            __DIR__ . '/../../resources/migrations' => database_path('migrations')
         ], 'migrations');
 
         $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
