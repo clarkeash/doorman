@@ -13,7 +13,7 @@ class CreateInvitesTable extends Migration
      */
     public function up()
     {
-        Schema::create('invites', function (Blueprint $table) {
+        Schema::create(config('doorman.invite_table_name'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->unique();
             $table->string('for')->nullable();
@@ -31,6 +31,6 @@ class CreateInvitesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invites');
+        Schema::dropIfExists(config('doorman.invite_table_name'));
     }
 }
