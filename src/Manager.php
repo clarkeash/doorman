@@ -13,15 +13,15 @@ use Illuminate\Support\Str;
 
 class Manager
 {
+    public $error = '';
+
     /**
      * @param             $code
      * @param string|null $email
      */
     public function redeem($code, string $email = null)
     {
-        $invite = $this->lookupInvite($code);
-
-        $this->validateInvite($invite, $email);
+        $invite = $this->prep($code, $email);
 
         $invite->increment('uses');
     }
@@ -35,13 +35,21 @@ class Manager
     public function check($code, string $email = null)
     {
         try {
-            $invite = $this->lookupInvite($code);
-            $this->validateInvite($invite, $email);
-
+            $this->prep($code, $email);
             return true;
         } catch (DoormanException $e) {
+            $this->error = $e->getMessage();
             return false;
         }
+    }
+
+    protected function prep($code, string $email = null)
+    {
+        $this->error = '';
+        $invite = $this->lookupInvite($code);
+        $this->validateInvite($invite, $email);
+
+        return $invite;
     }
 
     /**

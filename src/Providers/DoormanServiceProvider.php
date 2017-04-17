@@ -3,7 +3,10 @@
 namespace Clarkeash\Doorman\Providers;
 
 use Clarkeash\Doorman\Doorman;
+use Clarkeash\Doorman\Manager;
+use Clarkeash\Doorman\Validation\DoormanValidator;
 use Illuminate\Support\ServiceProvider;
+use Validator;
 
 class DoormanServiceProvider extends ServiceProvider
 {
@@ -23,6 +26,9 @@ class DoormanServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/translations', 'doorman');
+
+        Validator::extend('doorman', DoormanValidator::class . '@validate');
+        Validator::replacer('doorman', DoormanValidator::class . '@replace');
     }
 
     public function register()
@@ -33,5 +39,6 @@ class DoormanServiceProvider extends ServiceProvider
         );
 
         $this->app->bind('doorman', Doorman::class);
+        $this->app->singleton(Manager::class, Manager::class);
     }
 }
