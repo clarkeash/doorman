@@ -159,3 +159,20 @@ public function store(Request $request)
 ```
 
 The `:email` part is optional and will pass the email address to the `Doorman::check` method. The string after the colon `:` is the name of the email field in the request (this could be `email` or `email_address` etc).
+
+### Config - change table name
+
+First publish the package configuration:
+
+```bash
+$ php artisan vendor:publish --tag=config
+```
+
+In `config/doorman.php` you will see:
+
+```php
+return [
+    'invite_table_name' => 'invites',
+];
+```
+ If you change the table name and then run your migrations Doorman will then use the new table name.
