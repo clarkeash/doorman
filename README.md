@@ -141,3 +141,21 @@ $ php artisan vendor:publish --tag=translations
 ```
 
 The language files will then be in ````/resources/lang/vendor/doorman/en```` where you can edit the ````messages.php```` file, and these messages will be used by doorman. You can create support for other languages by creating extra folders with a ````messages.php```` file in the ````/resources/lang/vendor/doorman```` directory such as ````de```` where you could place your German translations. [Read the localisation docs for more info](https://laravel.com/docs/localization).
+
+### Validation
+
+If you would perfer to validate an invite code before you attempt to redeem it or you are using [Form Requests](https://laravel.com/docs/5.4/validation#form-request-validation) then you can validate it like so:
+
+```php
+public function store(Request $request)
+{
+    $this->validate($request, [
+        'email' => 'required|email|unique:users',
+        'code' => 'required|doorman:email',
+    ]);
+
+    // Add the user to the database.
+}
+```
+
+The `:email` part is optional and will pass the email address to the `Doorman::check` method. The string after the colon `:` is the name of the email field in the request (this could be `email` or `email_address` etc).
