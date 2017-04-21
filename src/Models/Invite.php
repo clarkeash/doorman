@@ -22,7 +22,9 @@ class Invite extends Model
      */
     public function hasExpired()
     {
-        if (is_null($this->valid_until)) return false;
+        if (is_null($this->valid_until)) {
+            return false;
+        }
 
         return $this->valid_until->isPast();
     }
@@ -34,7 +36,9 @@ class Invite extends Model
      */
     public function isFull()
     {
-        if ($this->max == 0) return false;
+        if ($this->max == 0) {
+            return false;
+        }
 
         return $this->uses >= $this->max;
     }
