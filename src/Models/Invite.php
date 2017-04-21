@@ -37,4 +37,9 @@ class Invite extends Model
     {
         return $email == $this->for;
     }
+
+    public function isUseless()
+    {
+        return $this->hasExpired() || $this->isFull();
+    }
 }

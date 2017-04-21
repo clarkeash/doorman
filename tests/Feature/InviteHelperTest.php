@@ -115,4 +115,44 @@ class InviteHelperTest extends TestCase
 
         Assert::assertTrue($two->isRestrictedFor('user@example.com'));
     }
+
+    /**
+     * @test
+     */
+    public function check_if_it_is_useless()
+    {
+        /** @var Invite $one */
+        $one = Invite::forceCreate([
+            'code' => 'ONE'
+        ]);
+
+        Assert::assertFalse($one->isUseless());
+
+        /** @var Invite $two */
+        $two = Invite::forceCreate([
+            'code' => 'TWO',
+            'valid_until' => Carbon::now()->subMinutes(5)
+        ]);
+
+        Assert::assertTrue($two->isUseless());
+
+        /** @var Invite $three */
+        $three = Invite::forceCreate([
+            'code' => 'THREE',
+            'uses' => 5,
+            'max' => 5
+        ]);
+
+        Assert::assertTrue($three->isUseless());
+
+        /** @var Invite $four */
+        $four = Invite::forceCreate([
+            'code' => 'FOUR',
+            'uses' => 5,
+            'max' => 5,
+            'valid_until' => Carbon::now()->subMinutes(5)
+        ]);
+
+        Assert::assertTrue($four->isUseless());
+    }
 }
