@@ -13,4 +13,18 @@ class Invite extends Model
         $this->table = config('doorman.invite_table_name');
         parent::__construct($attributes);
     }
+
+    public function getExpiredAttribute()
+    {
+        if(is_null($this->valid_until)) return false;
+
+        return $this->valid_until->isPast();
+    }
+
+    public function getFullAttribute()
+    {
+        if($this->max == 0) return false;
+
+        return $this->uses >= $this->max;
+    }
 }
