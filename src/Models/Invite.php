@@ -15,6 +15,11 @@ class Invite extends Model
         parent::__construct($attributes);
     }
 
+    /**
+     * Has the invite expired.
+     *
+     * @return bool
+     */
     public function hasExpired()
     {
         if (is_null($this->valid_until)) return false;
@@ -22,6 +27,11 @@ class Invite extends Model
         return $this->valid_until->isPast();
     }
 
+    /**
+     * Is the invite full.
+     *
+     * @return bool
+     */
     public function isFull()
     {
         if ($this->max == 0) return false;
@@ -29,16 +39,34 @@ class Invite extends Model
         return $this->uses >= $this->max;
     }
 
+    /**
+     * Is the invite restricted to a user.
+     *
+     * @return bool
+     */
     public function isRestricted()
     {
         return !is_null($this->for);
     }
 
+
+    /**
+     * Is the invite restricted for a particular user.
+     * 
+     * @param string $email
+     *
+     * @return bool
+     */
     public function isRestrictedFor($email)
     {
         return $email == $this->for;
     }
 
+    /**
+     * Can the invite be used anymore.
+     *
+     * @return bool
+     */
     public function isUseless()
     {
         return $this->hasExpired() || $this->isFull();
