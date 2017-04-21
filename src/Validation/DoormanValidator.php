@@ -31,12 +31,12 @@ class DoormanValidator
 
     protected function getParameterName($parameters, Validator $validator)
     {
-        if(isset($parameters[0])) return $parameters[0];
+        if (isset($parameters[ 0 ])) return $parameters[ 0 ];
 
-        $possibles = ['email', 'email_address'];
+        $possibles = [ 'email', 'email_address' ];
 
         foreach ($possibles as $possible) {
-            if(isset($validator->getData()[$possible])) return $possible;
+            if (isset($validator->getData()[ $possible ])) return $possible;
         }
     }
 
@@ -44,8 +44,8 @@ class DoormanValidator
     {
         $field = $this->getParameterName($parameters, $validator);
 
-        if($field) {
-            return $validator->getData()[$field];
+        if ($field) {
+            return $validator->getData()[ $field ];
         }
     }
 }
