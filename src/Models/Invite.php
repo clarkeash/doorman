@@ -27,4 +27,14 @@ class Invite extends Model
 
         return $this->uses >= $this->max;
     }
+
+    public function isRestricted()
+    {
+        return !is_null($this->for);
+    }
+
+    public function isRestrictedFor($email)
+    {
+        return $email == $this->for;
+    }
 }

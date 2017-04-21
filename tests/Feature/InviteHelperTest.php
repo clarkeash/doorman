@@ -73,4 +73,46 @@ class InviteHelperTest extends TestCase
 
         Assert::assertTrue($three->isFull());
     }
+
+    /**
+     * @test
+     */
+    public function check_if_it_is_restricted()
+    {
+        /** @var Invite $one */
+        $one = Invite::forceCreate([
+            'code' => 'ONE'
+        ]);
+
+        Assert::assertFalse($one->isRestricted());
+
+        /** @var Invite $two */
+        $two = Invite::forceCreate([
+            'code' => 'TWO',
+            'for' => 'user@example.com'
+        ]);
+
+        Assert::assertTrue($two->isRestricted());
+    }
+
+    /**
+     * @test
+     */
+    public function check_if_it_is_restricted_for_a_particular_person()
+    {
+        /** @var Invite $one */
+        $one = Invite::forceCreate([
+            'code' => 'ONE'
+        ]);
+
+        Assert::assertFalse($one->isRestrictedFor('user@example.com'));
+
+        /** @var Invite $two */
+        $two = Invite::forceCreate([
+            'code' => 'TWO',
+            'for' => 'user@example.com'
+        ]);
+
+        Assert::assertTrue($two->isRestrictedFor('user@example.com'));
+    }
 }
