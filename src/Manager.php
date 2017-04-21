@@ -77,15 +77,15 @@ class Manager
      */
     protected function validateInvite(Invite $invite, string $email = null)
     {
-        if ($invite->max != 0 && $invite->uses >= $invite->max) {
+        if ($invite->isFull()) {
             throw new MaxUsesReached(trans('doorman::messages.maxed', [ 'code' => $invite->code ]));
         }
 
-        if (!is_null($invite->valid_until) && $invite->valid_until->isPast()) {
+        if ($invite->hasExpired()) {
             throw new ExpiredInviteCode(trans('doorman::messages.expired', [ 'code' => $invite->code ]));
         }
 
-        if (!is_null($invite->for) && $invite->for != $email) {
+        if ($invite->isRestricted() && !$invite->isRestrictedFor($email)) {
             throw new NotYourInviteCode(trans('doorman::messages.restricted', [ 'code' => $invite->code ]));
         }
     }
