@@ -12,8 +12,6 @@ class DoormanValidator
      */
     private $manager;
 
-    private $message = 'bob';
-
     public function __construct(Manager $manager)
     {
         $this->manager = $manager;
