@@ -155,4 +155,92 @@ class InviteHelperTest extends TestCase
 
         Assert::assertTrue($four->isUseless());
     }
+
+    /**
+     * @test
+     */
+    public function expired_scope()
+    {
+        Invite::forceCreate([
+            'code' => 'ONE'
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'TWO',
+            'valid_until' => Carbon::now()->addMinutes(5)
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'THREE',
+            'valid_until' => Carbon::now()->subMinutes(5)
+        ]);
+
+        Assert::assertEquals(1, Invite::expired()->count());
+    }
+
+    /**
+     * @test
+     */
+    public function full_scope()
+    {
+        Invite::forceCreate([
+            'code' => 'ONE',
+            'uses' => 0,
+            'max' => 0
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'TWO',
+            'uses' => 5,
+            'max' => 0
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'THREE',
+            'uses' => 5,
+            'max' => 5
+        ]);
+
+        Assert::assertEquals(1, Invite::full()->count());
+    }
+
+    /**
+     * @test
+     */
+    public function useless_scope()
+    {
+        Invite::forceCreate([
+            'code' => 'ONE'
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'TWO',
+            'valid_until' => Carbon::now()->addMinutes(5)
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'THREE',
+            'valid_until' => Carbon::now()->subMinutes(5)
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'FOUR',
+            'uses' => 0,
+            'max' => 0
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'FIVE',
+            'uses' => 5,
+            'max' => 0
+        ]);
+
+        Invite::forceCreate([
+            'code' => 'SIX',
+            'uses' => 5,
+            'max' => 5
+        ]);
+
+        Assert::assertEquals(2, Invite::useless()->count());
+    }
 }
