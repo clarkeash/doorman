@@ -14,14 +14,14 @@ class Invite extends Model
         parent::__construct($attributes);
     }
 
-    public function getExpiredAttribute()
+    public function hasExpired()
     {
         if(is_null($this->valid_until)) return false;
 
         return $this->valid_until->isPast();
     }
 
-    public function getFullAttribute()
+    public function isFull()
     {
         if($this->max == 0) return false;
 
