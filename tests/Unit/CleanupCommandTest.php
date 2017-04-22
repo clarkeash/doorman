@@ -4,13 +4,13 @@ namespace Clarkeash\Doorman\Test\Unit;
 
 use Clarkeash\Doorman\Test\TestCase;
 use Illuminate\Support\Facades\Artisan;
-use Illuminate\Foundation\Testing\DatabaseTransactions;
+use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Clarkeash\Doorman\Models\Invite;
 use PHPUnit\Framework\Assert;
 
 class CleanupCommandTest extends TestCase
 {
-    use DatabaseTransactions;
+    use DatabaseMigrations;
 
     /**
      * @test
