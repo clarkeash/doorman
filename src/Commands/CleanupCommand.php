@@ -30,6 +30,6 @@ class CleanupCommand extends Command
     {
         $useless = Invite::useless()->count();
         Invite::useless()->delete();
-        $this->info('Successfully deleted '.$useless.' expired invites from the database.');
+        $this->info('Successfully deleted ' . $useless . ' expired invites from the database.');
     }
 }
