@@ -176,3 +176,11 @@ return [
 ];
 ```
  If you change the table name and then run your migrations Doorman will then use the new table name.
+ 
+ ### Console
+ 
+ To remove used and expired invites you can use the `cleanup` command:
+ 
+ ```bash
+$ php artisan doorman:cleanup
+```
