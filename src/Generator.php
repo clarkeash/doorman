@@ -80,7 +80,7 @@ class Generator
     protected function build(): Invite
     {
         $invite = new Invite;
-        $invite->code = Str::upper(Str::random(5));
+        $invite->code = Str::upper(Str::random(config('doorman.invite_length', 5)));
         $invite->for = $this->email;
         $invite->max = $this->uses;
         $invite->valid_until = $this->expiry;
