@@ -12,6 +12,12 @@ class DoormanServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                \Clarkeash\Doorman\Commands\CleanupCommand::class,
+            ]);
+        }
+        
         $this->publishes([
             __DIR__ . '/../../resources/config/doorman.php' => config_path('doorman.php'),
         ], 'config');
