@@ -2,17 +2,17 @@
 
 namespace Clarkeash\Doorman\Validation;
 
-use Clarkeash\Doorman\Manager;
+use Clarkeash\Doorman\Doorman;
 use Illuminate\Validation\Validator;
 
 class DoormanValidator
 {
     /**
-     * @var \Clarkeash\Doorman\Manager
+     * @var \Clarkeash\Doorman\Doorman
      */
     private $manager;
 
-    public function __construct(Manager $manager)
+    public function __construct(Doorman $manager)
     {
         $this->manager = $manager;
     }
