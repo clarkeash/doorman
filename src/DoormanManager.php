@@ -6,6 +6,12 @@ use Clarkeash\Doorman\Drivers\BasicDriver;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Manager;
 
+/**
+ * Class DoormanManager
+ *
+ * @package Clarkeash\Doorman
+ * @method string code()
+ */
 class DoormanManager extends Manager
 {
     public function __construct(Application $application)
