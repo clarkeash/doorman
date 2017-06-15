@@ -24,5 +24,15 @@
     "require-dev": {
         "orchestra/testbench": "^3.4",
         "phpunit/phpunit": "^6.0"
+    },
+    "extra": {
+      "laravel": {
+            "providers": [
+                "Clarkeash\\Doorman\\Providers\\DoormanServiceProvider"
+            ],
+            "aliases": {
+                "Doorman": "Clarkeash\\Doorman\\Facades\\Doorman"
+            }
+        }  
     }
 }
