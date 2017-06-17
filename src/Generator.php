@@ -13,6 +13,15 @@ class Generator
     protected $email;
     protected $expiry;
 
+    /**
+     * @var \Clarkeash\Doorman\DoormanManager
+     */
+    protected $manager;
+
+    public function __construct(DoormanManager $manager)
+    {
+        $this->manager = $manager;
+    }
 
     /**
      * @param int $amount
@@ -80,7 +89,7 @@ class Generator
     protected function build(): Invite
     {
         $invite = new Invite;
-        $invite->code = Str::upper(Str::random(5));
+        $invite->code = $this->manager->code();
         $invite->for = $this->email;
         $invite->max = $this->uses;
         $invite->valid_until = $this->expiry;

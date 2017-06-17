@@ -45,6 +45,6 @@ class DoormanServiceProvider extends ServiceProvider
         );
 
         $this->app->bind('doorman', Doorman::class);
-        $this->app->singleton(Manager::class, Manager::class);
+        $this->app->singleton(Doorman::class, Doorman::class);
     }
 }
