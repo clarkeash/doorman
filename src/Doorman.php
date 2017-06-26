@@ -82,7 +82,7 @@ class Doorman
         }
 
         if ($invite->hasExpired()) {
-            throw new ExpiredInviteCode(trans('doorman::messages.expired', [ 'code' => $invite->code ]));
+            throw ExpiredInviteCode::forInvite($invite);
         }
 
         if ($invite->isRestricted() && !$invite->isRestrictedFor($email)) {
