@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman;
 
 use Clarkeash\Doorman\Drivers\BasicDriver;
+use Clarkeash\Doorman\Drivers\UuidDriver;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Manager;
 
@@ -32,5 +33,10 @@ class DoormanManager extends Manager
     public function createBasicDriver()
     {
         return new BasicDriver;
+    }
+
+    public function createUuidDriver()
+    {
+        return new UuidDriver;
     }
 }

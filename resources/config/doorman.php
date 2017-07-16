@@ -34,9 +34,11 @@ return [
     */
     'basic' => [
         'length' => 5
+    ],
+
+    'uuid' => [
+        'version' => 4,
     ]
-
-
 
 ];
 

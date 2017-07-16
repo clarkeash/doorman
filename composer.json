@@ -1,38 +1,41 @@
 {
-    "name": "clarkeash/doorman",
-    "type": "library",
-    "license": "MIT",
-    "authors": [
-        {
-            "name": "Ashley Clarke",
-            "email": "me@ashleyclarke.me"
-        }
-    ],
-    "require": {
-        "php": ">=7.0.0"
-    },
-    "autoload": {
-        "psr-4": {
-            "Clarkeash\\Doorman\\": "src/"
-        }
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "Clarkeash\\Doorman\\Test\\": "tests/"
-        }
-    },
-    "require-dev": {
-        "orchestra/testbench": "^3.4",
-        "phpunit/phpunit": "^6.0"
-    },
-    "extra": {
-      "laravel": {
-            "providers": [
-                "Clarkeash\\Doorman\\Providers\\DoormanServiceProvider"
-            ],
-            "aliases": {
-                "Doorman": "Clarkeash\\Doorman\\Facades\\Doorman"
-            }
-        }  
+  "name": "clarkeash/doorman",
+  "type": "library",
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Ashley Clarke",
+      "email": "me@ashleyclarke.me"
     }
+  ],
+  "require": {
+    "php": ">=7.0.0",
+    "ramsey/uuid": "^3.6"
+  },
+  "autoload": {
+    "psr-4": {
+      "Clarkeash\\Doorman\\": "src/"
+    }
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Clarkeash\\Doorman\\Test\\": "tests/"
+    }
+  },
+  "require-dev": {
+    "orchestra/testbench": "^3.5@dev",
+    "phpunit/phpunit": "^6.0"
+  },
+  "minimum-stability": "dev",
+  "prefer-stable": true,
+  "extra": {
+    "laravel": {
+      "providers": [
+        "Clarkeash\\Doorman\\Providers\\DoormanServiceProvider"
+      ],
+      "aliases": {
+        "Doorman": "Clarkeash\\Doorman\\Facades\\Doorman"
+      }
+    }
+  }
 }
