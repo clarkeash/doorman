@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": ">=7.0.0",
+    "php": ">=7.0.22",
     "illuminate/framework": "~5.5.0",
     "ramsey/uuid": "^3.6"
   },
