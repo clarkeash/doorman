@@ -10,6 +10,7 @@
   ],
   "require": {
     "php": ">=7.0.0",
+    "illuminate/framework": "~5.5.0",
     "ramsey/uuid": "^3.6"
   },
   "autoload": {
@@ -23,11 +24,9 @@
     }
   },
   "require-dev": {
-    "orchestra/testbench": "^3.5@dev",
+    "orchestra/testbench": "^3.5",
     "phpunit/phpunit": "^6.0"
   },
-  "minimum-stability": "dev",
-  "prefer-stable": true,
   "extra": {
     "laravel": {
       "providers": [
