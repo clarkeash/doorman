@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman\Test\Feature;
 
 use Carbon\Carbon;
+use Clarkeash\Doorman\Exceptions\ExpiredInviteCode;
 use Clarkeash\Doorman\Models\Invite;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
@@ -60,14 +61,19 @@ class RedeemInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
-     * @expectedExceptionMessage The invite code ABCDE has expired.
      */
     public function it_squawks_if_code_has_expired()
     {
+        $validUntil = Carbon::now()->subDay();
+        $this->expectException(ExpiredInviteCode::class);
+        $this->expectExceptionMessage(sprintf(
+            'The invite code ABCDE has expired, expired on %s.',
+            $validUntil->format(ExpiredInviteCode::DATE_FORMAT)
+        ));
+
         Invite::forceCreate([
             'code' => 'ABCDE',
-            'valid_until' => Carbon::now()->subDay(),
+            'valid_until' => $validUntil,
         ]);
 
         Doorman::redeem('ABCDE');

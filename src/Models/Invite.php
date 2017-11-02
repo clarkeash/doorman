@@ -30,6 +30,16 @@ class Invite extends Model
     }
 
     /**
+     * Get the expiry time.
+     *
+     * @return \DateTimeImmutable
+     */
+    public function expires()
+    {
+        return \DateTimeImmutable::createFromMutable($this->valid_until);
+    }
+
+    /**
      * Is the invite full.
      *
      * @return bool
