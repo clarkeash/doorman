@@ -3,14 +3,14 @@
 namespace Clarkeash\Doorman;
 
 use Carbon\Carbon;
+use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\Invite;
-use Illuminate\Support\Str;
 
 class Generator
 {
     protected $amount = 1;
     protected $uses = 1;
-    protected $email;
+    protected $email = null;
     protected $expiry;
 
     /**
@@ -51,9 +51,14 @@ class Generator
      * @param string $email
      *
      * @return $this
+     * @throws \Clarkeash\Doorman\Exceptions\DuplicateException
      */
     public function for(string $email)
     {
+        if (Invite::where('for', strtolower($email))->first()) {
+            throw new DuplicateException('You cannot create more than 1 invite code for an email');
+        }
+
         $this->email = $email;
 
         return $this;
@@ -103,6 +108,10 @@ class Generator
     public function make()
     {
         $invites = collect();
+
+        if (!is_null($this->email) && $this->amount > 1) {
+            throw new DuplicateException('You cannot create more than 1 invite code for an email');
+        }
 
         for ($i = 0; $i < $this->amount; $i++) {
             $invite = $this->build();

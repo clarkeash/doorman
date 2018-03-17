@@ -16,7 +16,7 @@ class CreateInvitesTable extends Migration
         Schema::create(config('doorman.invite_table_name'), function (Blueprint $table) {
             $table->increments('id');
             $table->string('code')->unique();
-            $table->string('for')->nullable();
+            $table->string('for')->nullable()->unique();
             $table->integer('max')->default(1);
             $table->integer('uses')->default(0);
             $table->timestamp('valid_until')->nullable();

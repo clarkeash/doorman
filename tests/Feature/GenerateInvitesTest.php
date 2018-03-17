@@ -96,4 +96,23 @@ class GenerateInvitesTest extends TestCase
 
         Assert::assertEquals('me@ashleyclarke.me', $invite->for);
     }
+
+    /**
+     * @test
+     * @expectedException \Clarkeash\Doorman\Exceptions\DuplicateException
+     */
+    public function only_one_invite_per_email_can_be_generated_1()
+    {
+        Doorman::generate()->for('me@ashleyclarke.me')->make();
+        Doorman::generate()->for('me@ashleyclarke.me')->make();
+    }
+
+    /**
+     * @test
+     * @expectedException \Clarkeash\Doorman\Exceptions\DuplicateException
+     */
+    public function only_one_invite_per_email_can_be_generated_2()
+    {
+        Doorman::generate()->for('me@ashleyclarke.me')->times(3)->make();
+    }
 }

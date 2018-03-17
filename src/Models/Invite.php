@@ -7,9 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 
 class Invite extends Model
 {
-    protected $dates = [ 'valid_until' ];
-    
-    public function __construct(array $attributes = [ ])
+    protected $dates = ['valid_until'];
+
+    public function __construct(array $attributes = [])
     {
         $this->table = config('doorman.invite_table_name');
         parent::__construct($attributes);
@@ -17,7 +17,12 @@ class Invite extends Model
 
     public function setForAttribute($for)
     {
-        $this->attributes['for'] = strtolower($for);
+        if (is_string($for)) {
+            $this->attributes['for'] = strtolower($for);
+        } else {
+            $this->attributes['for'] = null;
+        }
+
     }
 
     /**
@@ -61,7 +66,7 @@ class Invite extends Model
 
     /**
      * Is the invite restricted for a particular user.
-     * 
+     *
      * @param string $email
      *
      * @return bool
@@ -85,6 +90,7 @@ class Invite extends Model
      * Scope a query to only include expired invites.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeExpired($query)
@@ -96,6 +102,7 @@ class Invite extends Model
      * Scope a query to only include full invites.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeFull($query)
@@ -107,17 +114,17 @@ class Invite extends Model
      * Scope a query to only include useless invites.
      *
      * @param \Illuminate\Database\Eloquent\Builder $query
+     *
      * @return \Illuminate\Database\Eloquent\Builder
      */
     public function scopeUseless($query)
     {
         return $query
-            ->where(function($q) {
+            ->where(function ($q) {
                 $this->scopeExpired($q);
             })
-            ->orWhere(function($q) {
+            ->orWhere(function ($q) {
                 $this->scopeFull($q);
-            })
-        ;
+            });
     }
 }
