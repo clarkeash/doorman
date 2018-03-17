@@ -15,6 +15,11 @@ class Invite extends Model
         parent::__construct($attributes);
     }
 
+    public function setForAttribute($for)
+    {
+        $this->attributes['for'] = strtolower($for);
+    }
+
     /**
      * Has the invite expired.
      *
@@ -63,7 +68,7 @@ class Invite extends Model
      */
     public function isRestrictedFor($email)
     {
-        return $email == $this->for;
+        return strtolower($email) == $this->for;
     }
 
     /**

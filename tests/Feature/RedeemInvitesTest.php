@@ -108,6 +108,40 @@ class RedeemInvitesTest extends TestCase
     /**
      * @test
      */
+    public function email_address_is_case_insensitive_1()
+    {
+        Invite::forceCreate([
+            'code' => 'ABCDE',
+            'for' => 'ME@ASHLEYCLARKE.ME'
+        ]);
+
+        Doorman::redeem('ABCDE', 'me@ashleyclarke.me');
+
+        $invite = Invite::where('code', '=', 'ABCDE')->firstOrFail();
+
+        Assert::assertEquals(1, $invite->uses);
+    }
+
+    /**
+     * @test
+     */
+    public function email_address_is_case_insensitive_2()
+    {
+        Invite::forceCreate([
+            'code' => 'ABCDE',
+            'for' => 'me@ashleyclarke.me'
+        ]);
+
+        Doorman::redeem('ABCDE', 'ME@ASHLEYCLARKE.ME');
+
+        $invite = Invite::where('code', '=', 'ABCDE')->firstOrFail();
+
+        Assert::assertEquals(1, $invite->uses);
+    }
+
+    /**
+     * @test
+     */
     public function a_unrestricted_invite_can_be_redeemed_when_email_is_provided()
     {
         Invite::forceCreate([

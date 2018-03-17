@@ -43,6 +43,16 @@ class Doorman
         }
     }
 
+    /**
+     * @param             $code
+     * @param string|null $email
+     *
+     * @return \Clarkeash\Doorman\Models\Invite
+     * @throws \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
+     * @throws \Clarkeash\Doorman\Exceptions\InvalidInviteCode
+     * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
+     * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
+     */
     protected function prep($code, string $email = null)
     {
         $this->error = '';
