@@ -17,7 +17,7 @@ class DoormanServiceProvider extends ServiceProvider
                 \Clarkeash\Doorman\Commands\CleanupCommand::class,
             ]);
         }
-        
+
         $this->publishes([
             __DIR__ . '/../../resources/config/doorman.php' => config_path('doorman.php'),
         ], 'config');
@@ -27,10 +27,13 @@ class DoormanServiceProvider extends ServiceProvider
         ], 'translations');
 
         $this->publishes([
-            __DIR__ . '/../../resources/migrations' => database_path('migrations')
+            __DIR__ . '/../../resources/migrations' => database_path('migrations'),
         ], 'migrations');
 
-        $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
+        if (config('doorman.skip_migrations', false) !== true) {
+            $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
+        }
+
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/translations', 'doorman');
 
         Validator::extend('doorman', DoormanValidator::class . '@validate');
