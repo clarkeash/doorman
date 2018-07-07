@@ -5,6 +5,7 @@ namespace Clarkeash\Doorman;
 use Carbon\Carbon;
 use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\Invite;
+use Clarkeash\Doorman\Models\InviteInterface;
 
 class Generator
 {
@@ -55,7 +56,9 @@ class Generator
      */
     public function for(string $email)
     {
-        if (Invite::where('for', strtolower($email))->first()) {
+        $inviteModel = config('doorman.model');
+
+        if ($inviteModel::where('for', strtolower($email))->first()) {
             throw new DuplicateException('You cannot create more than 1 invite code for an email');
         }
 
@@ -89,11 +92,13 @@ class Generator
     }
 
     /**
-     * @return \Clarkeash\Doorman\Models\Invite
+     * @return \Clarkeash\Doorman\Models\InviteInterface
      */
-    protected function build(): Invite
+    protected function build(): InviteInterface
     {
-        $invite = new Invite;
+        $inviteModel = config('doorman.model');
+
+        $invite = new $inviteModel;
         $invite->code = $this->manager->code();
         $invite->for = $this->email;
         $invite->max = $this->uses;
@@ -104,6 +109,8 @@ class Generator
 
     /**
      * @return \Illuminate\Support\Collection
+     *
+     * @throws \Clarkeash\Doorman\Exceptions\DuplicateException
      */
     public function make()
     {

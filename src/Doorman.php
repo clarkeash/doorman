@@ -8,6 +8,7 @@ use Clarkeash\Doorman\Exceptions\InvalidInviteCode;
 use Clarkeash\Doorman\Exceptions\MaxUsesReached;
 use Clarkeash\Doorman\Exceptions\NotYourInviteCode;
 use Clarkeash\Doorman\Models\Invite;
+use Clarkeash\Doorman\Models\InviteInterface;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Support\Str;
 
@@ -18,6 +19,11 @@ class Doorman
     /**
      * @param             $code
      * @param string|null $email
+     *
+     * @throws \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
+     * @throws \Clarkeash\Doorman\Exceptions\InvalidInviteCode
+     * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
+     * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
      */
     public function redeem($code, string $email = null)
     {
@@ -47,13 +53,13 @@ class Doorman
      * @param             $code
      * @param string|null $email
      *
-     * @return \Clarkeash\Doorman\Models\Invite
+     * @return \Clarkeash\Doorman\Models\InviteInterface
      * @throws \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
      * @throws \Clarkeash\Doorman\Exceptions\InvalidInviteCode
      * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
      * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
      */
-    protected function prep($code, string $email = null)
+    protected function prep($code, string $email = null): InviteInterface
     {
         $this->error = '';
         $invite = $this->lookupInvite($code);
@@ -68,24 +74,25 @@ class Doorman
      * @return \Clarkeash\Doorman\Models\Invite
      * @throws \Clarkeash\Doorman\Exceptions\InvalidInviteCode
      */
-    protected function lookupInvite($code): Invite
+    protected function lookupInvite($code): InviteInterface
     {
         try {
-            return Invite::where('code', '=', Str::upper($code))->firstOrFail();
+            $inviteModel = config('doorman.model');
+            return $inviteModel::where('code', '=', Str::upper($code))->firstOrFail();
         } catch (ModelNotFoundException $e) {
             throw new InvalidInviteCode(trans('doorman::messages.invalid', [ 'code' => $code ]));
         }
     }
 
     /**
-     * @param \Clarkeash\Doorman\Models\Invite $invite
-     * @param string|null                      $email
+     * @param \Clarkeash\Doorman\Models\InviteInterface $invite
+     * @param string|null                               $email
      *
      * @throws \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
      * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
      * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
      */
-    protected function validateInvite(Invite $invite, string $email = null)
+    protected function validateInvite(InviteInterface $invite, string $email = null)
     {
         if ($invite->isFull()) {
             throw new MaxUsesReached(trans('doorman::messages.maxed', [ 'code' => $invite->code ]));

@@ -28,8 +28,11 @@ class CleanupCommand extends Command
      */
     public function handle()
     {
-        $useless = Invite::useless()->count();
-        Invite::useless()->delete();
+        $inviteModel = config('doorman.model');
+
+        $useless = $inviteModel::useless()->count();
+        $inviteModel::useless()->delete();
+
         $this->info('Successfully deleted ' . $useless . ' expired invites from the database.');
     }
 }

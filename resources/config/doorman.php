@@ -25,6 +25,17 @@ return [
 
     /*
     |--------------------------------------------------------------------------
+    | Invite Model
+    |--------------------------------------------------------------------------
+    |
+    | This option allows specification of the invite model to utilise.
+    | The reference must be fully namespaced.
+    |
+    */
+    'model' => \Clarkeash\Doorman\Models\Invite::class,
+
+    /*
+    |--------------------------------------------------------------------------
     | Driver Configurations
     |--------------------------------------------------------------------------
     |

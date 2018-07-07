@@ -5,7 +5,7 @@ namespace Clarkeash\Doorman\Models;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
-class Invite extends Model
+class Invite extends Model implements InviteInterface
 {
     protected $dates = ['valid_until'];
 
