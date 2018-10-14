@@ -5,6 +5,7 @@ namespace Clarkeash\Doorman;
 use Carbon\Carbon;
 use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\Invite;
+use Illuminate\Support\Str;
 
 class Generator
 {
@@ -94,7 +95,7 @@ class Generator
     protected function build(): Invite
     {
         $invite = new Invite;
-        $invite->code = $this->manager->code();
+        $invite->code = Str::upper($this->manager->code());
         $invite->for = $this->email;
         $invite->max = $this->uses;
         $invite->valid_until = $this->expiry;
