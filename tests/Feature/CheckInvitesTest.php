@@ -104,38 +104,10 @@ class CheckInvitesTest extends TestCase
     /**
     * @test
     */
-    public function it_is_not_case_sensitive_on_uppercase_code()
+    public function it_is_not_case_sensitive()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
-        ]);
-
-        Assert::assertTrue(Doorman::check('ABCDE'));
-        Assert::assertTrue(Doorman::check('abcde'));
-        Assert::assertTrue(Doorman::check('AbCdE'));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_not_case_sensitive_on_lowercase_code()
-    {
-        Invite::forceCreate([
-            'code' => 'abcde',
-        ]);
-
-        Assert::assertTrue(Doorman::check('ABCDE'));
-        Assert::assertTrue(Doorman::check('abcde'));
-        Assert::assertTrue(Doorman::check('AbCdE'));
-    }
-
-    /**
-     * @test
-     */
-    public function it_is_not_case_sensitive_on_mixed_case_code()
-    {
-        Invite::forceCreate([
-            'code' => 'abCDe',
         ]);
 
         Assert::assertTrue(Doorman::check('ABCDE'));
