@@ -115,4 +115,16 @@ class GenerateInvitesTest extends TestCase
     {
         Doorman::generate()->for('me@ashleyclarke.me')->times(3)->make();
     }
+
+    /**
+    * @test
+    */
+    public function generated_codes_should_always_be_uppercase()
+    {
+        Doorman::generate()->make();
+
+        $invite = Invite::first();
+
+        Assert::assertEquals(strtoupper($invite->code), $invite->code);
+    }
 }
