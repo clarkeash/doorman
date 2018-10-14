@@ -281,16 +281,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.8",
+            "version": "v5.7.9",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "763b64a43ebb6042e463aab4214d4cc9722147be"
+                "reference": "172f69f86bb86e107fb9fafff293b4b01291cf05"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/763b64a43ebb6042e463aab4214d4cc9722147be",
-                "reference": "763b64a43ebb6042e463aab4214d4cc9722147be",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/172f69f86bb86e107fb9fafff293b4b01291cf05",
+                "reference": "172f69f86bb86e107fb9fafff293b4b01291cf05",
                 "shasum": ""
             },
             "require": {
@@ -419,7 +419,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2018-10-04T14:47:20+00:00"
+            "time": "2018-10-09T13:28:28+00:00"
         },
         {
             "name": "league/flysystem",
@@ -2267,21 +2267,21 @@
         },
         {
             "name": "orchestra/testbench",
-            "version": "v3.7.2",
+            "version": "v3.7.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench.git",
-                "reference": "254f8f38dc777a914e3c27ee39c9f854db44a670"
+                "reference": "c569608fcecc9ee044f2485d58c1ac5fab26ee2f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench/zipball/254f8f38dc777a914e3c27ee39c9f854db44a670",
-                "reference": "254f8f38dc777a914e3c27ee39c9f854db44a670",
+                "url": "https://api.github.com/repos/orchestral/testbench/zipball/c569608fcecc9ee044f2485d58c1ac5fab26ee2f",
+                "reference": "c569608fcecc9ee044f2485d58c1ac5fab26ee2f",
                 "shasum": ""
             },
             "require": {
                 "laravel/framework": "~5.7.4",
-                "orchestra/testbench-core": "~3.7.3",
+                "orchestra/testbench-core": "~3.7.5",
                 "php": ">=7.1",
                 "phpunit/phpunit": "^7.0"
             },
@@ -2315,20 +2315,20 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2018-09-13T10:35:30+00:00"
+            "time": "2018-10-07T02:44:38+00:00"
         },
         {
             "name": "orchestra/testbench-core",
-            "version": "v3.7.4",
+            "version": "v3.7.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/orchestral/testbench-core.git",
-                "reference": "a8b9fc170115333240eb0f6507b456bbe09c1121"
+                "reference": "9ef7319cc288a613e38f456f0349907dfeb2587f"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/a8b9fc170115333240eb0f6507b456bbe09c1121",
-                "reference": "a8b9fc170115333240eb0f6507b456bbe09c1121",
+                "url": "https://api.github.com/repos/orchestral/testbench-core/zipball/9ef7319cc288a613e38f456f0349907dfeb2587f",
+                "reference": "9ef7319cc288a613e38f456f0349907dfeb2587f",
                 "shasum": ""
             },
             "require": {
@@ -2379,7 +2379,7 @@
                 "orchestral",
                 "testing"
             ],
-            "time": "2018-10-03T07:44:35+00:00"
+            "time": "2018-10-07T01:22:19+00:00"
         },
         {
             "name": "phar-io/manifest",
