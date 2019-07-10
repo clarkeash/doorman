@@ -56,7 +56,9 @@ class Generator
      */
     public function for(string $email)
     {
-        if (Invite::where('for', strtolower($email))->first()) {
+        $modelClass = config('doorman.invite_model');
+
+        if ($modelClass::where('for', strtolower($email))->first()) {
             throw new DuplicateException('You cannot create more than 1 invite code for an email');
         }
 
@@ -94,7 +96,9 @@ class Generator
      */
     protected function build(): Invite
     {
-        $invite = new Invite;
+        $modelClass = config('doorman.invite_model');
+
+        $invite = new $modelClass();
         $invite->code = Str::upper($this->manager->code());
         $invite->for = $this->email;
         $invite->max = $this->uses;

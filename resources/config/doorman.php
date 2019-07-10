@@ -11,6 +11,18 @@ return [
     'invite_table_name' => 'invites',
 
     /*
+     |--------------------------------------------------------------------------
+     | Invite Model Class
+     |--------------------------------------------------------------------------
+     |
+     | This option allows you to override the default model.
+     | Your model MUST extend the base Invite model.
+     |
+     | Default: Clarkeash\Doorman\Models\Invite::class
+     */
+    'invite_model' => Clarkeash\Doorman\Models\Invite::class,
+
+    /*
     |--------------------------------------------------------------------------
     | Default Code Generator
     |--------------------------------------------------------------------------
@@ -33,7 +45,7 @@ return [
     |
     */
     'basic' => [
-        'length' => 5
+        'length' => 5,
     ],
 
     /*
@@ -48,7 +60,6 @@ return [
     */
     'uuid' => [
         'version' => 4,
-    ]
+    ],
 
 ];
-

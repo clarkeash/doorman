@@ -71,7 +71,8 @@ class Doorman
     protected function lookupInvite($code): Invite
     {
         try {
-            return Invite::where('code', '=', Str::upper($code))->firstOrFail();
+            $modelClass = config('doorman.invite_model');
+            return $modelClass::where('code', '=', Str::upper($code))->firstOrFail();
         } catch (ModelNotFoundException $e) {
             throw new InvalidInviteCode(trans('doorman::messages.invalid', [ 'code' => $code ]));
         }
