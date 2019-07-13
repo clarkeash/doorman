@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property int uses
  * @property string|null for
  * @property string code
+ * @mixin Builder
  */
 abstract class BaseInvite extends Model
 {
