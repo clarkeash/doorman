@@ -4,6 +4,7 @@ namespace Clarkeash\Doorman\Providers;
 
 use Clarkeash\Doorman\Doorman;
 use Clarkeash\Doorman\Manager;
+use Clarkeash\Doorman\Models\BaseInvite;
 use Clarkeash\Doorman\Validation\DoormanValidator;
 use Illuminate\Support\ServiceProvider;
 use Validator;
@@ -43,6 +44,10 @@ class DoormanServiceProvider extends ServiceProvider
             __DIR__ . '/../../resources/config/doorman.php',
             'doorman'
         );
+
+        $this->app->bind(BaseInvite::class, function($app) {
+            return new $app['config']['doorman.invite_model'];
+        });
 
         $this->app->bind('doorman', Doorman::class);
         $this->app->singleton(Doorman::class, Doorman::class);

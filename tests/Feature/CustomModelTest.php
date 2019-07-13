@@ -2,9 +2,9 @@
 
 namespace Clarkeash\Doorman\Test\Feature;
 
+use Clarkeash\Doorman\Models\Invite;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
-use Clarkeash\Doorman\Test\TestCustomModel;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 
 class CustomModelTest extends TestCase
@@ -14,7 +14,7 @@ class CustomModelTest extends TestCase
     protected function getEnvironmentSetUp($app)
     {
         parent::getEnvironmentSetUp($app);
-        $app['config']->set('doorman.invite_model', TestCustomModel::class);
+        $app['config']->set('doorman.invite_model', MyCustomModel::class);
     }
 
     /**
@@ -24,6 +24,10 @@ class CustomModelTest extends TestCase
     {
         $invites = Doorman::generate()->make();
 
-        $this->assertEquals(TestCustomModel::class, get_class($invites->first()));
+        $this->assertEquals(MyCustomModel::class, get_class($invites->first()));
     }
+}
+
+class MyCustomModel extends Invite {
+
 }

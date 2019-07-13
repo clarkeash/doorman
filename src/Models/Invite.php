@@ -3,18 +3,10 @@
 namespace Clarkeash\Doorman\Models;
 
 use Carbon\Carbon;
-use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Builder;
 
-class Invite extends Model
+class Invite extends BaseInvite
 {
-    protected $dates = ['valid_until'];
-
-    public function __construct(array $attributes = [])
-    {
-        $this->table = config('doorman.invite_table_name');
-        parent::__construct($attributes);
-    }
-
     public function setForAttribute($for)
     {
         if (is_string($for)) {
@@ -22,7 +14,6 @@ class Invite extends Model
         } else {
             $this->attributes['for'] = null;
         }
-
     }
 
     /**
@@ -30,7 +21,7 @@ class Invite extends Model
      *
      * @return bool
      */
-    public function hasExpired()
+    public function hasExpired(): bool
     {
         if (is_null($this->valid_until)) {
             return false;
@@ -44,7 +35,7 @@ class Invite extends Model
      *
      * @return bool
      */
-    public function isFull()
+    public function isFull(): bool
     {
         if ($this->max == 0) {
             return false;
@@ -58,7 +49,7 @@ class Invite extends Model
      *
      * @return bool
      */
-    public function isRestricted()
+    public function isRestricted(): bool
     {
         return !is_null($this->for);
     }
@@ -71,7 +62,7 @@ class Invite extends Model
      *
      * @return bool
      */
-    public function isRestrictedFor($email)
+    public function isRestrictedFor($email): bool
     {
         return strtolower($email) == $this->for;
     }
@@ -81,7 +72,7 @@ class Invite extends Model
      *
      * @return bool
      */
-    public function isUseless()
+    public function isUseless(): bool
     {
         return $this->hasExpired() || $this->isFull();
     }
@@ -93,7 +84,7 @@ class Invite extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeExpired($query)
+    public function scopeExpired(Builder $query): Builder
     {
         return $query->where('valid_until', '<', Carbon::now(config('app.timezone')));
     }
@@ -105,7 +96,7 @@ class Invite extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeFull($query)
+    public function scopeFull(Builder $query): Builder
     {
         return $query->where('max', '!=', 0)->whereRaw('uses = max');
     }
@@ -117,7 +108,7 @@ class Invite extends Model
      *
      * @return \Illuminate\Database\Eloquent\Builder
      */
-    public function scopeUseless($query)
+    public function scopeUseless(Builder $query): Builder
     {
         return $query
             ->where(function ($q) {
