@@ -137,7 +137,7 @@ Doorman::check('ABCDE', 'me@ashleyclarke.me');
 In order to change the error message returned from doorman, we need to publish the language files like so:
 
 ```bash
-$ php artisan vendor:publish --tag=translations
+$ php artisan vendor:publish --tag=doorman-translations
 ```
 
 The language files will then be in ````/resources/lang/vendor/doorman/en```` where you can edit the ````messages.php```` file, and these messages will be used by doorman. You can create support for other languages by creating extra folders with a ````messages.php```` file in the ````/resources/lang/vendor/doorman```` directory such as ````de```` where you could place your German translations. [Read the localisation docs for more info](https://laravel.com/docs/localization).
@@ -165,7 +165,7 @@ You should pass the email address into the constructor to validate the code agai
 First publish the package configuration:
 
 ```bash
-$ php artisan vendor:publish --tag=config
+$ php artisan vendor:publish --tag=doorman-config
 ```
 
 In `config/doorman.php` you will see:
