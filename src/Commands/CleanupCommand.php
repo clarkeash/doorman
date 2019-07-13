@@ -3,7 +3,6 @@
 namespace Clarkeash\Doorman\Commands;
 
 use Illuminate\Console\Command;
-use Clarkeash\Doorman\Models\Invite;
 
 class CleanupCommand extends Command
 {
@@ -28,8 +27,9 @@ class CleanupCommand extends Command
      */
     public function handle()
     {
-        $useless = Invite::useless()->count();
-        Invite::useless()->delete();
+        $modelClass = config('doorman.invite_model');
+        $useless = $modelClass::useless()->count();
+        $modelClass::useless()->delete();
         $this->info('Successfully deleted ' . $useless . ' expired invites from the database.');
     }
 }
