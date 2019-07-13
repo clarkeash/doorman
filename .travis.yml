@@ -14,6 +14,12 @@ matrix:
     env: ILLUMINATE_MINOR_VERSION=7
   - php: 7.3
     env: ILLUMINATE_MINOR_VERSION=7
+  - php: 7.1
+    env: ILLUMINATE_MINOR_VERSION=8
+  - php: 7.2
+    env: ILLUMINATE_MINOR_VERSION=8
+  - php: 7.3
+    env: ILLUMINATE_MINOR_VERSION=8
 
 cache:
   directories:
