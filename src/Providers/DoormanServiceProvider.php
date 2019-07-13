@@ -33,9 +33,6 @@ class DoormanServiceProvider extends ServiceProvider
 
         $this->loadMigrationsFrom(__DIR__ . '/../../resources/migrations');
         $this->loadTranslationsFrom(__DIR__ . '/../../resources/translations', 'doorman');
-
-        Validator::extend('doorman', DoormanValidator::class . '@validate');
-        Validator::replacer('doorman', DoormanValidator::class . '@replace');
     }
 
     public function register()

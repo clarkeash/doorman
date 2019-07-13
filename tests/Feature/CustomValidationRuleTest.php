@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman\Test\Feature;
 
 use Clarkeash\Doorman\Models\Invite;
+use Clarkeash\Doorman\Validation\DoormanRule;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
@@ -24,7 +25,7 @@ class CustomValidationRuleTest extends TestCase
         ]);
 
         $rules = [
-            'code' => 'doorman'
+            'code' => new DoormanRule()
         ];
 
         $data = [
@@ -47,49 +48,13 @@ class CustomValidationRuleTest extends TestCase
             'for' => 'me@ashleyclarke.me'
         ]);
 
-        $rules = [
-            'code' => 'doorman:email'
-        ];
-
         $data = [
             'code' => 'ABCDE',
             'email' => 'me@ashleyclarke.me'
         ];
 
-        $validator = Validator::make($data, $rules);
-
-        Assert::assertTrue($validator->passes());
-    }
-
-    /**
-     * @test
-     */
-    public function will_try_to_guess_email_field_if_not_specified()
-    {
-        Invite::forceCreate([
-            'code' => 'ABCDE',
-            'max' => 2,
-            'for' => 'me@ashleyclarke.me'
-        ]);
-
         $rules = [
-            'code' => 'doorman'
-        ];
-
-        // Try with 'email'
-        $data = [
-            'code' => 'ABCDE',
-            'email' => 'me@ashleyclarke.me'
-        ];
-
-        $validator = Validator::make($data, $rules);
-
-        Assert::assertTrue($validator->passes());
-
-        // try with 'email_address'
-        $data = [
-            'code' => 'ABCDE',
-            'email_address' => 'me@ashleyclarke.me'
+            'code' => new DoormanRule($data['email'])
         ];
 
         $validator = Validator::make($data, $rules);
@@ -108,13 +73,13 @@ class CustomValidationRuleTest extends TestCase
             'for' => 'me@ashleyclarke.me'
         ]);
 
-        $rules = [
-            'code' => 'doorman:email'
-        ];
-
         $data = [
             'code' => 'ABCDE',
             'email' => 'wrong@email.com'
+        ];
+
+        $rules = [
+            'code' => new DoormanRule($data['email'])
         ];
 
         /** @var \Illuminate\Validation\Validator $validator */

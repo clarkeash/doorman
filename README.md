@@ -151,14 +151,14 @@ public function store(Request $request)
 {
     $this->validate($request, [
         'email' => 'required|email|unique:users',
-        'code' => 'required|doorman:email',
+        'code' => ['required', new DoormanRule($request->get('email'))],
     ]);
 
     // Add the user to the database.
 }
 ```
 
-The `:email` part is optional and will pass the email address to the `Doorman::check` method. The string after the colon `:` is the name of the email field in the request (this could be `email` or `email_address` etc).
+You should pass the email address into the constructor to validate the code against that email. If you know the code can be used with any email, then you can leave the parameter empty.
 
 ### Config - change table name
 
