@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman\Test\Feature;
 
 use Carbon\Carbon;
+use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\Invite;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
@@ -99,20 +100,22 @@ class GenerateInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\DuplicateException
      */
     public function only_one_invite_per_email_can_be_generated_1()
     {
+        $this->expectException(DuplicateException::class);
+
         Doorman::generate()->for('me@ashleyclarke.me')->make();
         Doorman::generate()->for('me@ashleyclarke.me')->make();
     }
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\DuplicateException
      */
     public function only_one_invite_per_email_can_be_generated_2()
     {
+        $this->expectException(DuplicateException::class);
+
         Doorman::generate()->for('me@ashleyclarke.me')->times(3)->make();
     }
 

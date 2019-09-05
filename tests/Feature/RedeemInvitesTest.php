@@ -3,6 +3,10 @@
 namespace Clarkeash\Doorman\Test\Feature;
 
 use Carbon\Carbon;
+use Clarkeash\Doorman\Exceptions\ExpiredInviteCode;
+use Clarkeash\Doorman\Exceptions\InvalidInviteCode;
+use Clarkeash\Doorman\Exceptions\MaxUsesReached;
+use Clarkeash\Doorman\Exceptions\NotYourInviteCode;
 use Clarkeash\Doorman\Models\Invite;
 use Doorman;
 use Clarkeash\Doorman\Test\TestCase;
@@ -15,11 +19,12 @@ class RedeemInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\InvalidInviteCode
-     * @expectedExceptionMessage The invite code NOPE is invalid.
      */
     public function it_squawks_if_code_is_invalid()
     {
+        $this->expectException(InvalidInviteCode::class);
+        $this->expectExceptionMessage('The invite code NOPE is invalid.');
+
         Doorman::redeem('NOPE');
     }
 
@@ -44,11 +49,12 @@ class RedeemInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\MaxUsesReached
-     * @expectedExceptionMessage The invite code ABCDE has already been used the maximum number of times.
      */
     public function it_squawks_if_maximum_uses_has_been_reached()
     {
+        $this->expectException(MaxUsesReached::class);
+        $this->expectExceptionMessage('The invite code ABCDE has already been used the maximum number of times.');
+
         Invite::forceCreate([
             'code' => 'ABCDE',
             'max' => 2,
@@ -60,11 +66,12 @@ class RedeemInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\ExpiredInviteCode
-     * @expectedExceptionMessage The invite code ABCDE has expired.
      */
     public function it_squawks_if_code_has_expired()
     {
+        $this->expectException(ExpiredInviteCode::class);
+        $this->expectExceptionMessage('The invite code ABCDE has expired.');
+
         Invite::forceCreate([
             'code' => 'ABCDE',
             'valid_until' => Carbon::now()->subDay(),
@@ -75,11 +82,12 @@ class RedeemInvitesTest extends TestCase
 
     /**
      * @test
-     * @expectedException \Clarkeash\Doorman\Exceptions\NotYourInviteCode
-     * @expectedExceptionMessage The invite code ABCDE belongs to another user.
      */
     public function it_squawks_if_trying_to_use_a_code_belonging_to_someone_else()
     {
+        $this->expectException(NotYourInviteCode::class);
+        $this->expectExceptionMessage('The invite code ABCDE belongs to another user.');
+
         Invite::forceCreate([
             'code' => 'ABCDE',
             'for' => 'me@ashleyclarke.me'

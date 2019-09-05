@@ -7,6 +7,7 @@ use Clarkeash\Doorman\Drivers\DriverInterface;
 use Clarkeash\Doorman\Drivers\UuidDriver;
 use Clarkeash\Doorman\Test\TestCase;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
+use InvalidArgumentException;
 use PHPUnit\Framework\Assert;
 use Ramsey\Uuid\Uuid;
 
@@ -45,10 +46,11 @@ class UuidDriverTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
      */
     public function it_throws_exception_if_invalid_version_supplied()
     {
+        $this->expectException(InvalidArgumentException::class);
+
         $this->app['config']['doorman.uuid.version'] = 2;
 
         $driver = new UuidDriver;
@@ -58,11 +60,12 @@ class UuidDriverTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Namespace must be set for uuid version 3
      */
     public function namespace_is_required_for_version_3()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Namespace must be set for uuid version 3');
+
         $this->app['config']['doorman.uuid.version'] = 3;
         $this->app['config']['doorman.uuid.name'] = 'example';
 
@@ -73,11 +76,12 @@ class UuidDriverTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Name must be set for uuid version 3
      */
     public function name_is_required_for_version_3()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Name must be set for uuid version 3');
+
         $this->app['config']['doorman.uuid.version'] = 3;
         $this->app['config']['doorman.uuid.namespace'] = 'example';
 
@@ -117,11 +121,12 @@ class UuidDriverTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Namespace must be set for uuid version 5
      */
     public function namespace_is_required_for_version_5()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Namespace must be set for uuid version 5');
+
         $this->app['config']['doorman.uuid.version'] = 5;
         $this->app['config']['doorman.uuid.name'] = 'example';
 
@@ -132,11 +137,12 @@ class UuidDriverTest extends TestCase
 
     /**
      * @test
-     * @expectedException \InvalidArgumentException
-     * @expectedExceptionMessage Name must be set for uuid version 5
      */
     public function name_is_required_for_version_5()
     {
+        $this->expectException(InvalidArgumentException::class);
+        $this->expectExceptionMessage('Name must be set for uuid version 5');
+
         $this->app['config']['doorman.uuid.version'] = 5;
         $this->app['config']['doorman.uuid.namespace'] = 'example';
 
