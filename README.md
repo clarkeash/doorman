@@ -26,35 +26,22 @@ Invite Codes:
 * Can have a limited number of uses or unlimited.
 * Can have an expiry date, or never expire.
 
+## Laravel Support
+
+ Laravel  | Doorman
+:---------|:----------
+ 5.x      | 3.x
+ 6.x      | 4.x
+
 ## Installation
 
 You can pull in the package using [composer](https://getcomposer.org):
 
 ```bash
-$ composer require clarkeash/doorman
+$ composer require "clarkeash/doorman=^4.0"
 ```
 
-Next, register the service provider with Laravel:
-
-```php
-// config/app.php
-'providers' => [
-    ...
-    Clarkeash\Doorman\Providers\DoormanServiceProvider::class,
-];
-```
-
-And, register the facade:
-
-```php
-// config/app.php
-'aliases' => [
-    ...
-    'Doorman' => Clarkeash\Doorman\Facades\Doorman::class,
-];
-```
-
-Finally, migrate the database:
+Next, migrate the database:
 
 ```bash
 $ php artisan migrate
