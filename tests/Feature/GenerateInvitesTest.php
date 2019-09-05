@@ -63,13 +63,13 @@ class GenerateInvitesTest extends TestCase
      */
     public function it_can_have_an_expiry_date()
     {
-        $date = Carbon::now( 'UTC')->endOfDay()->second(59);
+        $date = Carbon::now( 'UTC')->endOfDay();
 
         Doorman::generate()->expiresOn($date)->make();
 
         $invite = Invite::first();
 
-        Assert::assertEquals($date, $invite->valid_until);
+        Assert::assertLessThan(1, $date->floatDiffInSeconds($invite->valid_until));
     }
 
     /**
@@ -83,7 +83,7 @@ class GenerateInvitesTest extends TestCase
 
         $date = Carbon::now('UTC')->addDays(7)->endOfDay()->second(59);
 
-        Assert::assertEquals($date, $invite->valid_until);
+        Assert::assertLessThan(1, $date->floatDiffInSeconds($invite->valid_until));
     }
 
     /**
