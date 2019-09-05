@@ -30,11 +30,19 @@ class UuidDriver implements DriverInterface
         throw new InvalidArgumentException("Version [$version] not supported.");
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     protected function createVersion1Uuid(): string
     {
         return Uuid::uuid1()->toString();
     }
 
+    /**
+     * @return string
+     * @throws \Throwable
+     */
     protected function createVersion3Uuid(): string
     {
         throw_unless(config('doorman.uuid.namespace'), InvalidArgumentException::class, 'Namespace must be set for uuid version 3');
@@ -43,11 +51,19 @@ class UuidDriver implements DriverInterface
         return Uuid::uuid3(config('doorman.uuid.namespace'), config('doorman.uuid.namespace'))->toString();
     }
 
+    /**
+     * @return string
+     * @throws \Exception
+     */
     protected function createVersion4Uuid(): string
     {
         return Uuid::uuid4()->toString();
     }
 
+    /**
+     * @return string
+     * @throws \Throwable
+     */
     protected function createVersion5Uuid(): string
     {
         throw_unless(config('doorman.uuid.namespace'), InvalidArgumentException::class, 'Namespace must be set for uuid version 5');

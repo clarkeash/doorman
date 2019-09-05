@@ -114,6 +114,9 @@ class Doorman
         }
     }
 
+    /**
+     * @return Generator
+     */
     public function generate()
     {
         return app(Generator::class);

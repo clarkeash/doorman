@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman;
 
 use Clarkeash\Doorman\Drivers\BasicDriver;
+use Clarkeash\Doorman\Drivers\DriverInterface;
 use Clarkeash\Doorman\Drivers\UuidDriver;
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Manager;
@@ -23,18 +24,24 @@ class DoormanManager extends Manager
     /**
      * Get the default driver name.
      *
-     * @return string
+     * @return DriverInterface
      */
     public function getDefaultDriver()
     {
         return $this->app['config']['doorman.driver'];
     }
 
+    /**
+     * @return BasicDriver
+     */
     public function createBasicDriver()
     {
         return new BasicDriver;
     }
 
+    /**
+     * @return UuidDriver
+     */
     public function createUuidDriver()
     {
         return new UuidDriver;

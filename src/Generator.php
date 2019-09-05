@@ -97,6 +97,7 @@ class Generator
 
     /**
      * @return \Clarkeash\Doorman\Models\BaseInvite
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     protected function build(): BaseInvite
     {
@@ -112,6 +113,7 @@ class Generator
     /**
      * @return \Illuminate\Support\Collection
      * @throws DuplicateException
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
      */
     public function make()
     {
