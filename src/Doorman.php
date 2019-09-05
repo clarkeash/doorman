@@ -114,6 +114,9 @@ class Doorman
         }
     }
 
+    /**
+     * @return \Clarkeash\Doorman\Generator
+     */
     public function generate()
     {
         return app(Generator::class);
