@@ -2,10 +2,9 @@ language: php
 
 matrix:
   include:
-  - php: 7.2
-    env: ILLUMINATE_MINOR_VERSION=0
-  - php: 7.3
-    env: ILLUMINATE_MINOR_VERSION=0
+    - php: 7.2
+    - php: 7.3
+    - php: 7.4
 
 cache:
   directories:
@@ -13,8 +12,8 @@ cache:
 
 before_install:
   - travis_retry composer self-update
-  - composer require "laravel/framework:6.${ILLUMINATE_MINOR_VERSION}.*" --no-update
-  - composer require "orchestra/testbench:4.${ILLUMINATE_MINOR_VERSION}.*" --no-update
+  - composer require "laravel/framework:^6.0" --no-update
+  - composer require "orchestra/testbench:^4.0" --no-update
 
 install:
   - travis_retry composer update --prefer-source --no-interaction --no-suggest
