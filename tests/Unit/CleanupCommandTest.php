@@ -2,6 +2,7 @@
 
 namespace Clarkeash\Doorman\Test\Unit;
 
+use Carbon\Carbon;
 use Clarkeash\Doorman\Test\TestCase;
 use Illuminate\Support\Facades\Artisan;
 use Illuminate\Foundation\Testing\DatabaseMigrations;

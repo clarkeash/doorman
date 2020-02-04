@@ -72,11 +72,11 @@ class Generator
     }
 
     /**
-     * @param \Carbon\Carbon $date
+     * @param \DateTimeInterface $date
      *
      * @return $this
      */
-    public function expiresOn(Carbon $date)
+    public function expiresOn(\DateTimeInterface $date)
     {
         $this->expiry = $date;
 

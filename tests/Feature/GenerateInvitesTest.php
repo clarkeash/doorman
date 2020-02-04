@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman\Test\Feature;
 
 use Carbon\Carbon;
+use Carbon\CarbonImmutable;
 use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\Invite;
 use Doorman;
@@ -63,13 +64,55 @@ class GenerateInvitesTest extends TestCase
      */
     public function it_can_have_an_expiry_date()
     {
-        $date = Carbon::now( 'UTC')->endOfDay();
+        $date = Carbon::now('UTC')->endOfDay();
 
         Doorman::generate()->expiresOn($date)->make();
 
         $invite = Invite::first();
 
         Assert::assertLessThan(1, $date->floatDiffInSeconds($invite->valid_until));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_accept_immutable_date()
+    {
+        $date = CarbonImmutable::now('UTC')->endOfDay();
+
+        Doorman::generate()->expiresOn($date)->make();
+
+        $invite = Invite::first();
+
+        Assert::assertLessThan(1, $date->floatDiffInSeconds($invite->valid_until));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_accept_vanilla_date()
+    {
+        $date = (new \DateTime)->setTime(23, 59, 59);
+
+        Doorman::generate()->expiresOn($date)->make();
+
+        $invite = Invite::first();
+
+        Assert::assertLessThan(1, $date->diff($invite->valid_until)->format('%s'));
+    }
+
+    /**
+     * @test
+     */
+    public function it_can_accept_vanilla_immutable_date()
+    {
+        $date = (new \DateTimeImmutable)->setTime(23, 59, 59);
+
+        Doorman::generate()->expiresOn($date)->make();
+
+        $invite = Invite::first();
+
+        Assert::assertLessThan(1, $date->diff($invite->valid_until)->format('%s'));
     }
 
     /**
@@ -120,8 +163,8 @@ class GenerateInvitesTest extends TestCase
     }
 
     /**
-    * @test
-    */
+     * @test
+     */
     public function generated_codes_should_always_be_uppercase()
     {
         Doorman::generate()->make();
