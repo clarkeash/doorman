@@ -12,7 +12,7 @@ cache:
 
 before_install:
   - travis_retry composer self-update
-  - composer require "laravel/framework:^6.0" --no-update
+  - composer require "laravel/framework:^7.0" --no-update
   - composer require "orchestra/testbench:^4.0" --no-update
 
 install:
