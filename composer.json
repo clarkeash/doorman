@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": "^7.2",
+    "php": "^7.2.5",
     "laravel/framework": "^7.0",
     "ramsey/uuid": "^3.6"
   },
