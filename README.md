@@ -2,19 +2,20 @@
 
 <p align="center">
   <a href="https://travis-ci.org/clarkeash/doorman">
-    <img src="https://img.shields.io/travis/clarkeash/doorman.svg?style=flat-square">
+    <img src="https://img.shields.io/travis/clarkeash/doorman.svg?style=for-the-badge">
   </a>
   <a href="https://scrutinizer-ci.com/g/clarkeash/doorman/code-structure/master/code-coverage">
-      <img src="https://img.shields.io/scrutinizer/coverage/g/clarkeash/doorman.svg?style=flat-square">
+      <img src="https://img.shields.io/scrutinizer/coverage/g/clarkeash/doorman.svg?style=for-the-badge">
     </a>
   <a href="https://scrutinizer-ci.com/g/clarkeash/doorman">
-    <img src="https://img.shields.io/scrutinizer/g/clarkeash/doorman.svg?style=flat-square">
+    <img src="https://img.shields.io/scrutinizer/g/clarkeash/doorman.svg?style=for-the-badge">
   </a>
   <a href="https://github.com/clarkeash/doorman/blob/master/LICENSE">
-    <img src="https://img.shields.io/github/license/clarkeash/doorman.svg?style=flat-square">
+    <img src="https://img.shields.io/github/license/clarkeash/doorman.svg?style=for-the-badge">
   </a>
+  <img alt="GitHub release (latest SemVer)" src="https://img.shields.io/github/v/release/clarkeash/doorman?sort=semver&style=for-the-badge">  
   <a href="https://twitter.com/clarkeash">
-    <img src="http://img.shields.io/badge/author-@clarkeash-blue.svg?style=flat-square">
+    <img src="http://img.shields.io/badge/author-@clarkeash-blue.svg?style=for-the-badge">
   </a>
 </p>
 
