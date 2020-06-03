@@ -173,4 +173,14 @@ class GenerateInvitesTest extends TestCase
 
         Assert::assertEquals(strtoupper($invite->code), $invite->code);
     }
+
+    /**
+    * @test
+    */
+    public function it_will_generate_an_invite_only_once()
+    {
+        $invite = Doorman::generate()->once();
+
+        Assert::assertInstanceOf(Invite::class, $invite);
+    }
 }

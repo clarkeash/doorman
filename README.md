@@ -84,6 +84,13 @@ Make an invite for a specific person.
 Doorman::generate()->for('me@ashleyclarke.me')->make();
 ```
 
+Alternatively instead of calling `make()` which will return a collection of invites you can call `once()` if you only want a single invite generated.
+```php
+$invite = Doorman::generate()->for('me@ashleyclarke.me')->once();
+dd($invite->code);
+```
+
+
 ### Redeem Invites
 
 You can redeem an invite by calling the ````redeem```` method. Providing the invite code and optionally an email address.

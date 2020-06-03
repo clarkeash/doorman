@@ -133,4 +133,13 @@ class Generator
 
         return $invites;
     }
+
+    /**
+     * @return BaseInvite
+     * @throws \Illuminate\Contracts\Container\BindingResolutionException
+     */
+    public function once(): BaseInvite
+    {
+        return tap($this->build())->save();
+    }
 }
