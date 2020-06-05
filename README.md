@@ -68,6 +68,11 @@ Make an invite with 10 redemptions and no expiry.
 Doorman::generate()->uses(10)->make();
 ```
 
+Make an invite with unlimited redemptions and no expiry.
+```php
+Doorman::generate()->unlimited()->make();
+```
+
 Make an invite that expires on a specific date.
 ```php
 $date = Carbon::now('UTC')->addDays(7);
