@@ -1,0 +1,38 @@
+# This is a basic workflow to help you get started with Actions
+
+name: Install Test
+
+# Controls when the action will run. Triggers the workflow on push or pull request
+# events but only for the master branch
+on:
+  push:
+  pull_request:
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  tests:
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }} (${{ matrix.platform }})
+      strategy:
+        matrix:
+          platform: [ubuntu-latest, windows-latest]
+          php: [7.2, 7.3, 7.4]
+          stability: [prefer-lowest, prefer-stable]
+
+      runs-on: ${{ matrix.platform }}
+
+      steps:
+        - name: Setup PHP
+          uses: shivammathur/setup-php@v2
+          with:
+            php-version: ${{ matrix.php }}
+            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
+            coverage: none
+
+        - name: Install Laravel
+          run: composer create-project --prefer-dist laravel/laravel app
+
+        - name: Install Doorman
+          run: |
+            cd app
+            composer require clarkeash/doorman
