@@ -46,5 +46,5 @@ jobs:
 
       - name: Scruntinizer
         run: |
-          wget https://scrutinizer-ci.com/ocular.phar
+          curl https://scrutinizer-ci.com/ocular.phar --output ocular.phar
           php ocular.phar code-coverage:upload --format=php-clover coverage.clover
