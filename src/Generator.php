@@ -3,6 +3,7 @@
 namespace Clarkeash\Doorman;
 
 use Carbon\Carbon;
+use DateTimeInterface;
 use Clarkeash\Doorman\Exceptions\DuplicateException;
 use Clarkeash\Doorman\Models\BaseInvite;
 use Illuminate\Support\Str;
@@ -55,6 +56,14 @@ class Generator
     }
 
     /**
+     * @return $this
+     */
+    public function unlimited()
+    {
+        return $this->uses(0);
+    }
+
+    /**
      * @param string $email
      *
      * @return $this
@@ -72,11 +81,11 @@ class Generator
     }
 
     /**
-     * @param \DateTimeInterface $date
+     * @param DateTimeInterface $date
      *
      * @return $this
      */
-    public function expiresOn(\DateTimeInterface $date)
+    public function expiresOn(DateTimeInterface $date)
     {
         $this->expiry = $date;
 

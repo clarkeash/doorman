@@ -183,4 +183,14 @@ class GenerateInvitesTest extends TestCase
 
         Assert::assertInstanceOf(Invite::class, $invite);
     }
+
+    /**
+    * @test
+    */
+    public function it_will_generate_an_invite_with_unlimited_redemptions()
+    {
+        $invite = Doorman::generate()->unlimited()->once();
+
+        Assert::assertEquals(0, $invite->uses);
+    }
 }
