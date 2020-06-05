@@ -19,20 +19,20 @@ jobs:
         php: [7.2, 7.3, 7.4]
         stability: [prefer-lowest, prefer-stable]
 
-      runs-on: ${{ matrix.platform }}
+    runs-on: ${{ matrix.platform }}
 
-      steps:
-        - name: Setup PHP
-          uses: shivammathur/setup-php@v2
-          with:
-            php-version: ${{ matrix.php }}
-            extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
-            coverage: none
+    steps:
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: dom, curl, libxml, mbstring, zip, pcntl, pdo, sqlite, pdo_sqlite, gd
+          coverage: none
 
-        - name: Install Laravel
-          run: composer create-project --prefer-dist laravel/laravel app
+      - name: Install Laravel
+        run: composer create-project --prefer-dist laravel/laravel app
 
-        - name: Install Doorman
-          run: |
-            cd app
-            composer require clarkeash/doorman
+      - name: Install Doorman
+        run: |
+          cd app
+          composer require clarkeash/doorman
