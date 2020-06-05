@@ -12,6 +12,7 @@ on:
 jobs:
   # This workflow contains a single job called "build"
   tests:
+    name: PHP ${{ matrix.php }} - ${{ matrix.stability }} (${{ runner.os }})
     strategy:
       matrix:
         platform: [ubuntu-latest, windows-latest]
