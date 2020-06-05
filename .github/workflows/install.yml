@@ -13,11 +13,11 @@ jobs:
   # This workflow contains a single job called "build"
   tests:
     name: PHP ${{ matrix.php }} - ${{ matrix.stability }} (${{ matrix.platform }})
-      strategy:
-        matrix:
-          platform: [ubuntu-latest, windows-latest]
-          php: [7.2, 7.3, 7.4]
-          stability: [prefer-lowest, prefer-stable]
+    strategy:
+      matrix:
+        platform: [ubuntu-latest, windows-latest]
+        php: [7.2, 7.3, 7.4]
+        stability: [prefer-lowest, prefer-stable]
 
       runs-on: ${{ matrix.platform }}
 
