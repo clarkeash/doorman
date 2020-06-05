@@ -45,6 +45,7 @@ jobs:
         run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover
 
       - name: Scruntinizer
+        if: ${{ matrix.platform == 'ubuntu-latest' }}
         run: |
-          curl https://scrutinizer-ci.com/ocular.phar --output ocular.phar
+          wget https://scrutinizer-ci.com/ocular.phar
           php ocular.phar code-coverage:upload --format=php-clover coverage.clover
