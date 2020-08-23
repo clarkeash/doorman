@@ -20,7 +20,7 @@ return [
      |
      | Default: Clarkeash\Doorman\Models\Invite::class
      */
-    'invite_model' => Clarkeash\Doorman\Models\Invite::class,
+    'invite_model' => \Clarkeash\Doorman\Models\Invite::class,
 
     /*
     |--------------------------------------------------------------------------
