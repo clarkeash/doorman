@@ -28,6 +28,7 @@
     "phpunit/phpunit": "^9.0",
     "mockery/mockery": "^1.2"
   },
+  "minimum-stability": "dev",
   "extra": {
     "laravel": {
       "providers": [
