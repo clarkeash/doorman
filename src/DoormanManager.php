@@ -28,7 +28,7 @@ class DoormanManager extends Manager
      */
     public function getDefaultDriver()
     {
-        return $this->app['config']['doorman.driver'];
+        return $this->container['config']['doorman.driver'];
     }
 
     /**
