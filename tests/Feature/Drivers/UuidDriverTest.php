@@ -40,7 +40,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . Uuid::VALID_PATTERN . '/', $code);
         Assert::assertSame(1, Uuid::fromString($code)->getVersion());
     }
 
@@ -102,7 +102,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . Uuid::VALID_PATTERN . '/', $code);
         Assert::assertSame(3, Uuid::fromString($code)->getVersion());
     }
 
@@ -115,7 +115,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . Uuid::VALID_PATTERN . '/', $code);
         Assert::assertSame(4, Uuid::fromString($code)->getVersion());
     }
 
@@ -163,7 +163,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . Uuid::VALID_PATTERN . '/', $code);
         Assert::assertSame(5, Uuid::fromString($code)->getVersion());
     }
 }
