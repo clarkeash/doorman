@@ -10,6 +10,7 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use InvalidArgumentException;
 use PHPUnit\Framework\Assert;
 use Ramsey\Uuid\Uuid;
+use Ramsey\Uuid\Validator\GenericValidator;
 
 class UuidDriverTest extends TestCase
 {
@@ -40,7 +41,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . (new GenericValidator)->getPattern() . '/', $code);
         Assert::assertSame(1, Uuid::fromString($code)->getVersion());
     }
 
@@ -102,7 +103,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . (new GenericValidator)->getPattern() . '/', $code);
         Assert::assertSame(3, Uuid::fromString($code)->getVersion());
     }
 
@@ -115,7 +116,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . (new GenericValidator)->getPattern() . '/', $code);
         Assert::assertSame(4, Uuid::fromString($code)->getVersion());
     }
 
@@ -163,7 +164,7 @@ class UuidDriverTest extends TestCase
 
         $code = $driver->code();
 
-        Assert::assertRegExp('/' . Uuid::VALID_PATTERN . '/', $code);
+        Assert::assertMatchesRegularExpression('/' . (new GenericValidator)->getPattern() . '/', $code);
         Assert::assertSame(5, Uuid::fromString($code)->getVersion());
     }
 }
