@@ -40,7 +40,7 @@ jobs:
           coverage: xdebug
 
       - name: Install dependencies
-        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction --no-suggest
+        run: composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: Execute tests
         run: vendor/bin/phpunit --coverage-text --coverage-clover=coverage.clover

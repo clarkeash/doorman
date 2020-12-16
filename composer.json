@@ -26,7 +26,7 @@
   "require-dev": {
     "orchestra/testbench": "^6.0",
     "phpunit/phpunit": "^9.3",
-    "mockery/mockery": "^1.2"
+    "mockery/mockery": "^1.4"
   },
   "extra": {
     "laravel": {
