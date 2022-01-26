@@ -9,7 +9,7 @@
     }
   ],
   "require": {
-    "php": "^7.3|^8.0",
+    "php": "^8.0",
     "laravel/framework": "^9.0",
     "ramsey/uuid": "^4.0"
   },
@@ -24,7 +24,7 @@
     }
   },
   "require-dev": {
-    "orchestra/testbench": "^6.0|^7.0",
+    "orchestra/testbench": "^7.0",
     "phpunit/phpunit": "^9.3",
     "mockery/mockery": "^1.4"
   },
