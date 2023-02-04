@@ -10,7 +10,7 @@
   ],
   "require": {
     "php": "^8.0",
-    "laravel/framework": "^9.0",
+    "laravel/framework": "^9.0|^10.0",
     "ramsey/uuid": "^4.0"
   },
   "autoload": {
