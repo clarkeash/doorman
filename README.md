@@ -2,7 +2,7 @@
 
 <p align="center">
   <a href="https://github.com/clarkeash/laravel-http-stats/actions?query=workflow%3ACI">
-    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/workflow/status/clarkeash/doorman/CI?logo=github&style=for-the-badge">
+    <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/clarkeash/doorman/tests.yml?logo=github&style=for-the-badge">
   </a>
   <a href="https://github.com/clarkeash/doorman/blob/master/LICENSE">
     <img src="https://img.shields.io/github/license/clarkeash/doorman.svg?style=for-the-badge">
