@@ -32,13 +32,14 @@ Invite Codes:
  7.x      | 5.x
  8.x      | 6.x
  9.x      | 7.x
+ 10.x     | 8.x
 
 ## Installation
 
 You can pull in the package using [composer](https://getcomposer.org):
 
 ```bash
-$ composer require "clarkeash/doorman=^7.0"
+$ composer require "clarkeash/doorman=^8.0"
 ```
 
 Next, migrate the database:
