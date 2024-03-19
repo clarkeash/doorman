@@ -17,10 +17,7 @@ class CustomModelTest extends TestCase
         $app['config']->set('doorman.invite_model', MyCustomModel::class);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_use_a_custom_model()
+    public function test_it_can_use_a_custom_model()
     {
         $invites = Doorman::generate()->make();
 

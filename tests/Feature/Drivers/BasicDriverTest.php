@@ -13,35 +13,23 @@ class BasicDriverTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function it_is_a_driver()
+    public function test_it_is_a_driver()
     {
         Assert::assertInstanceOf(DriverInterface::class, new BasicDriver);
     }
 
-    /**
-     * @test
-     */
-    public function it_is_the_correct_driver()
+    public function test_it_is_the_correct_driver()
     {
         Assert::assertInstanceOf(BasicDriver::class, app(DoormanManager::class)->driver('basic'));
     }
 
-    /**
-     * @test
-     */
-    public function it_is_the_default_driver()
+    public function test_it_is_the_default_driver()
     {
         Assert::assertSame('basic', config('doorman.driver'));
         Assert::assertSame('basic', app(DoormanManager::class)->getDefaultDriver());
     }
 
-    /**
-     * @test
-     */
-    public function it_has_a_default_length()
+    public function test_it_has_a_default_length()
     {
         Assert::assertSame(5, config('doorman.basic.length'));
 
@@ -50,10 +38,7 @@ class BasicDriverTest extends TestCase
         Assert::assertSame(5, strlen($driver->code()));
     }
 
-    /**
-     * @test
-     */
-    public function it_allows_the_length_to_be_overridden()
+    public function test_it_allows_the_length_to_be_overridden()
     {
         Assert::assertSame(5, config('doorman.basic.length'));
 

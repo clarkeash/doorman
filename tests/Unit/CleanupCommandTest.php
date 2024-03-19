@@ -13,10 +13,7 @@ class CleanupCommandTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function it_deletes_wasted_invites()
+    public function test_it_deletes_wasted_invites()
     {
       Assert::assertCount(0, Invite::all());
 
@@ -39,7 +36,7 @@ class CleanupCommandTest extends TestCase
         Assert::assertCount(1, Invite::all());
     }
 
-    public function it_deletes_expired_invites()
+    public function test_it_deletes_expired_invites()
     {
       Assert::assertCount(0, Invite::all());
 

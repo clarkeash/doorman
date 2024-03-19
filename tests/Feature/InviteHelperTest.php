@@ -12,10 +12,7 @@ class InviteHelperTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function check_if_it_has_expired()
+    public function test_can_check_if_it_has_expired()
     {
         /** @var Invite $one */
         $one = Invite::forceCreate([
@@ -41,10 +38,7 @@ class InviteHelperTest extends TestCase
         Assert::assertTrue($three->hasExpired());
     }
 
-    /**
-     * @test
-     */
-    public function check_if_it_is_full()
+    public function test_can_check_if_it_is_full()
     {
         /** @var Invite $one */
         $one = Invite::forceCreate([
@@ -74,10 +68,7 @@ class InviteHelperTest extends TestCase
         Assert::assertTrue($three->isFull());
     }
 
-    /**
-     * @test
-     */
-    public function check_if_it_is_restricted()
+    public function test_can_check_if_it_is_restricted()
     {
         /** @var Invite $one */
         $one = Invite::forceCreate([
@@ -95,10 +86,7 @@ class InviteHelperTest extends TestCase
         Assert::assertTrue($two->isRestricted());
     }
 
-    /**
-     * @test
-     */
-    public function check_if_it_is_restricted_for_a_particular_person()
+    public function test_can_check_if_it_is_restricted_for_a_particular_person()
     {
         /** @var Invite $one */
         $one = Invite::forceCreate([
@@ -116,10 +104,7 @@ class InviteHelperTest extends TestCase
         Assert::assertTrue($two->isRestrictedFor('user@example.com'));
     }
 
-    /**
-     * @test
-     */
-    public function check_if_it_is_useless()
+    public function test_can_check_if_it_is_useless()
     {
         /** @var Invite $one */
         $one = Invite::forceCreate([
@@ -156,10 +141,7 @@ class InviteHelperTest extends TestCase
         Assert::assertTrue($four->isUseless());
     }
 
-    /**
-     * @test
-     */
-    public function expired_scope()
+    public function test_expired_scope()
     {
         Invite::forceCreate([
             'code' => 'ONE'
@@ -178,10 +160,7 @@ class InviteHelperTest extends TestCase
         Assert::assertEquals(1, Invite::expired()->count());
     }
 
-    /**
-     * @test
-     */
-    public function full_scope()
+    public function test_full_scope()
     {
         Invite::forceCreate([
             'code' => 'ONE',
@@ -204,10 +183,7 @@ class InviteHelperTest extends TestCase
         Assert::assertEquals(1, Invite::full()->count());
     }
 
-    /**
-     * @test
-     */
-    public function useless_scope()
+    public function test_useless_scope()
     {
         Invite::forceCreate([
             'code' => 'ONE'
