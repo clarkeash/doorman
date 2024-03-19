@@ -2,4 +2,5 @@
 /.idea
 coverage.xml
 .phpunit.result.cache
+.phpunit.cache
 composer.lock
