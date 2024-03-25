@@ -16,24 +16,17 @@ class UuidDriverTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function it_is_a_driver()
+    public function test_it_is_a_driver()
     {
         Assert::assertInstanceOf(DriverInterface::class, new UuidDriver);
     }
 
-    /**
-     * @test
-     */
-    public function it_is_the_correct_driver()
+    public function test_it_is_the_correct_driver()
     {
         Assert::assertInstanceOf(UuidDriver::class, app(DoormanManager::class)->driver('uuid'));
     }
 
-    /** @test */
-    public function it_can_generate_a_version_1_uuid()
+    public function test_it_can_generate_a_version_1_uuid()
     {
         $this->app['config']['doorman.uuid.version'] = 1;
 
@@ -45,10 +38,7 @@ class UuidDriverTest extends TestCase
         Assert::assertSame(1, Uuid::fromString($code)->getVersion());
     }
 
-    /**
-     * @test
-     */
-    public function it_throws_exception_if_invalid_version_supplied()
+    public function test_it_throws_exception_if_invalid_version_supplied()
     {
         $this->expectException(InvalidArgumentException::class);
 
@@ -59,10 +49,7 @@ class UuidDriverTest extends TestCase
         $driver->code();
     }
 
-    /**
-     * @test
-     */
-    public function namespace_is_required_for_version_3()
+    public function test_namespace_is_required_for_version_3()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Namespace must be set for uuid version 3');
@@ -75,10 +62,7 @@ class UuidDriverTest extends TestCase
         $driver->code();
     }
 
-    /**
-     * @test
-     */
-    public function name_is_required_for_version_3()
+    public function test_name_is_required_for_version_3()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Name must be set for uuid version 3');
@@ -91,9 +75,7 @@ class UuidDriverTest extends TestCase
         $driver->code();
     }
 
-
-    /** @test */
-    public function it_can_generate_a_version_3_uuid()
+    public function test_it_can_generate_a_version_3_uuid()
     {
         $this->app['config']['doorman.uuid.version'] = 3;
         $this->app['config']['doorman.uuid.namespace'] = Uuid::NAMESPACE_DNS;
@@ -107,8 +89,7 @@ class UuidDriverTest extends TestCase
         Assert::assertSame(3, Uuid::fromString($code)->getVersion());
     }
 
-    /** @test */
-    public function it_can_generate_a_version_4_uuid()
+    public function test_it_can_generate_a_version_4_uuid()
     {
         $this->app['config']['doorman.uuid.version'] = 4;
 
@@ -120,10 +101,7 @@ class UuidDriverTest extends TestCase
         Assert::assertSame(4, Uuid::fromString($code)->getVersion());
     }
 
-    /**
-     * @test
-     */
-    public function namespace_is_required_for_version_5()
+    public function test_namespace_is_required_for_version_5()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Namespace must be set for uuid version 5');
@@ -136,10 +114,7 @@ class UuidDriverTest extends TestCase
         $driver->code();
     }
 
-    /**
-     * @test
-     */
-    public function name_is_required_for_version_5()
+    public function test_name_is_required_for_version_5()
     {
         $this->expectException(InvalidArgumentException::class);
         $this->expectExceptionMessage('Name must be set for uuid version 5');
@@ -152,9 +127,7 @@ class UuidDriverTest extends TestCase
         $driver->code();
     }
 
-
-    /** @test */
-    public function it_can_generate_a_version_5_uuid()
+    public function test_it_can_generate_a_version_5_uuid()
     {
         $this->app['config']['doorman.uuid.version'] = 5;
         $this->app['config']['doorman.uuid.namespace'] = Uuid::NAMESPACE_DNS;

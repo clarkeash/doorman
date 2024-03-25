@@ -9,10 +9,7 @@ use PHPUnit\Framework\Assert;
 
 class DoormanTest extends TestCase
 {
-    /**
-     * @test
-     */
-    public function it_provides_a_generator()
+    public function test_it_provides_a_generator()
     {
         $generator = Doorman::generate();
 

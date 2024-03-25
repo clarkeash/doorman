@@ -17,10 +17,7 @@ class RedeemInvitesTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function it_squawks_if_code_is_invalid()
+    public function test_it_squawks_if_code_is_invalid()
     {
         $this->expectException(InvalidInviteCode::class);
         $this->expectExceptionMessage('The invite code NOPE is invalid.');
@@ -28,10 +25,7 @@ class RedeemInvitesTest extends TestCase
         Doorman::redeem('NOPE');
     }
 
-    /**
-     * @test
-     */
-    public function it_increments_uses_if_valid_code()
+    public function test_it_increments_uses_if_valid_code()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -47,10 +41,7 @@ class RedeemInvitesTest extends TestCase
         Assert::assertEquals(2, $invite->uses);
     }
 
-    /**
-     * @test
-     */
-    public function it_squawks_if_maximum_uses_has_been_reached()
+    public function test_it_squawks_if_maximum_uses_has_been_reached()
     {
         $this->expectException(MaxUsesReached::class);
         $this->expectExceptionMessage('The invite code ABCDE has already been used the maximum number of times.');
@@ -64,10 +55,7 @@ class RedeemInvitesTest extends TestCase
         Doorman::redeem('ABCDE');
     }
 
-    /**
-     * @test
-     */
-    public function it_squawks_if_code_has_expired()
+    public function test_it_squawks_if_code_has_expired()
     {
         $this->expectException(ExpiredInviteCode::class);
         $this->expectExceptionMessage('The invite code ABCDE has expired.');
@@ -80,10 +68,7 @@ class RedeemInvitesTest extends TestCase
         Doorman::redeem('ABCDE');
     }
 
-    /**
-     * @test
-     */
-    public function it_squawks_if_trying_to_use_a_code_belonging_to_someone_else()
+    public function test_it_squawks_if_trying_to_use_a_code_belonging_to_someone_else()
     {
         $this->expectException(NotYourInviteCode::class);
         $this->expectExceptionMessage('The invite code ABCDE belongs to another user.');
@@ -96,10 +81,7 @@ class RedeemInvitesTest extends TestCase
         Doorman::redeem('ABCDE');
     }
 
-    /**
-     * @test
-     */
-    public function it_can_redeem_a_code_for_a_specific_user()
+    public function test_it_can_redeem_a_code_for_a_specific_user()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -113,10 +95,7 @@ class RedeemInvitesTest extends TestCase
         Assert::assertEquals(1, $invite->uses);
     }
 
-    /**
-     * @test
-     */
-    public function email_address_is_case_insensitive_1()
+    public function test_email_address_is_case_insensitive_1()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -130,10 +109,7 @@ class RedeemInvitesTest extends TestCase
         Assert::assertEquals(1, $invite->uses);
     }
 
-    /**
-     * @test
-     */
-    public function email_address_is_case_insensitive_2()
+    public function test_email_address_is_case_insensitive_2()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -147,10 +123,7 @@ class RedeemInvitesTest extends TestCase
         Assert::assertEquals(1, $invite->uses);
     }
 
-    /**
-     * @test
-     */
-    public function a_unrestricted_invite_can_be_redeemed_when_email_is_provided()
+    public function test_a_unrestricted_invite_can_be_redeemed_when_email_is_provided()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -163,10 +136,7 @@ class RedeemInvitesTest extends TestCase
         Assert::assertEquals(1, $invite->uses);
     }
 
-    /**
-     * @test
-     */
-    public function it_can_have_unlimited_redemptions()
+    public function test_it_can_have_unlimited_redemptions()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',

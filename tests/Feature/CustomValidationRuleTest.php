@@ -14,10 +14,7 @@ class CustomValidationRuleTest extends TestCase
 {
     use DatabaseMigrations;
 
-    /**
-     * @test
-     */
-    public function basic_validation()
+    public function test_basic_validation()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -37,10 +34,7 @@ class CustomValidationRuleTest extends TestCase
         Assert::assertTrue($validator->passes());
     }
 
-    /**
-     * @test
-     */
-    public function validates_email_address()
+    public function test_validates_email_address()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
@@ -62,10 +56,7 @@ class CustomValidationRuleTest extends TestCase
         Assert::assertTrue($validator->passes());
     }
 
-    /**
-     * @test
-     */
-    public function it_provides_an_error_message()
+    public function test_it_provides_an_error_message()
     {
         Invite::forceCreate([
             'code' => 'ABCDE',
