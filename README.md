@@ -1,7 +1,7 @@
 # Doorman
 
 <p align="center">
-  <a href="https://github.com/clarkeash/laravel-http-stats/actions?query=workflow%3ACI">
+  <a href="https://github.com/clarkeash/doorman/actions?query=workflow%3ACI">
     <img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/clarkeash/doorman/tests.yml?logo=github&style=for-the-badge">
   </a>
   <a href="https://github.com/clarkeash/doorman/blob/master/LICENSE">
