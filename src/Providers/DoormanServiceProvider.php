@@ -16,6 +16,7 @@ class DoormanServiceProvider extends ServiceProvider
         if ($this->app->runningInConsole()) {
             $this->commands([
                 \Clarkeash\Doorman\Commands\CleanupCommand::class,
+                \Clarkeash\Doorman\Commands\MakeCommand::class,
             ]);
         }
         
