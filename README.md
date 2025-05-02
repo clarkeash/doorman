@@ -41,13 +41,13 @@ Invite Codes:
 You can pull in the package using [composer](https://getcomposer.org):
 
 ```bash
-$ composer require "clarkeash/doorman=^10.0"
+composer require "clarkeash/doorman=^10.0"
 ```
 
 Next, migrate the database:
 
 ```bash
-$ php artisan migrate
+php artisan migrate
 ```
 
 ## Usage
@@ -139,7 +139,7 @@ Doorman::check('ABCDE', 'me@ashleyclarke.me');
 In order to change the error message returned from doorman, we need to publish the language files like so:
 
 ```bash
-$ php artisan vendor:publish --tag=doorman-translations
+php artisan vendor:publish --tag=doorman-translations
 ```
 
 The language files will then be in ````/resources/lang/vendor/doorman/en```` where you can edit the ````messages.php```` file, and these messages will be used by doorman. You can create support for other languages by creating extra folders with a ````messages.php```` file in the ````/resources/lang/vendor/doorman```` directory such as ````de```` where you could place your German translations. [Read the localisation docs for more info](https://laravel.com/docs/localization).
@@ -167,7 +167,7 @@ You should pass the email address into the constructor to validate the code agai
 First publish the package configuration:
 
 ```bash
-$ php artisan vendor:publish --tag=doorman-config
+php artisan vendor:publish --tag=doorman-config
 ```
 
 In `config/doorman.php` you will see:
@@ -179,10 +179,22 @@ return [
 ```
  If you change the table name and then run your migrations Doorman will then use the new table name.
  
- ### Console
+ ## Console
  
+### Cleanup
+
  To remove used and expired invites you can use the `cleanup` command:
  
- ```bash
-$ php artisan doorman:cleanup
+```bash
+php artisan doorman:cleanup
+```
+
+### Create a new invite
+
+You can create a new invite from the command line using the `make` command:
+
+```bash
+php artisan doorman:make
+php artisan doorman:make --uses=5 --expiry=2025-12-31 --email=me@ashleyclarke.me
+php artisan doorman:make --unlimited
 ```
