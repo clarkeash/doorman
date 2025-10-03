@@ -13,12 +13,12 @@ use Illuminate\Support\Str;
 
 class Doorman
 {
-    public $error = '';
+    public string$error = '';
 
     /**
      * @var BaseInvite
      */
-    protected $invite;
+    protected BaseInvite $invite;
 
     public function __construct(BaseInvite $invite)
     {
@@ -33,7 +33,7 @@ class Doorman
      * @throws MaxUsesReached
      * @throws NotYourInviteCode
      */
-    public function redeem($code, string $email = null)
+    public function redeem($code, ?string $email = null): void
     {
         $invite = $this->prep($code, $email);
 
@@ -46,7 +46,7 @@ class Doorman
      *
      * @return bool
      */
-    public function check($code, string $email = null)
+    public function check($code, ?string $email = null): bool
     {
         try {
             $this->prep($code, $email);
@@ -67,7 +67,7 @@ class Doorman
      * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
      * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
      */
-    protected function prep($code, string $email = null)
+    protected function prep($code, ?string $email = null): BaseInvite
     {
         $this->error = '';
         $invite = $this->lookupInvite($code);
@@ -99,7 +99,7 @@ class Doorman
      * @throws \Clarkeash\Doorman\Exceptions\MaxUsesReached
      * @throws \Clarkeash\Doorman\Exceptions\NotYourInviteCode
      */
-    protected function validateInvite(BaseInvite $invite, string $email = null)
+    protected function validateInvite(BaseInvite $invite, ?string $email = null): void
     {
         if ($invite->isFull()) {
             throw new MaxUsesReached(trans('doorman::messages.maxed', ['code' => $invite->code]));
@@ -117,7 +117,7 @@ class Doorman
     /**
      * @return Generator
      */
-    public function generate()
+    public function generate(): Generator
     {
         return app(Generator::class);
     }
