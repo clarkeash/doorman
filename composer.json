@@ -1,46 +1,46 @@
 {
-  "name": "clarkeash/doorman",
-  "type": "library",
-  "license": "MIT",
-  "authors": [
-    {
-      "name": "Ashley Clarke",
-      "email": "me@ashleyclarke.me"
-    }
-  ],
-  "require": {
-    "php": "^8.2",
-    "laravel/framework": "^12.0",
-    "ramsey/uuid": "^4.0"
-  },
-  "autoload": {
-    "psr-4": {
-      "Clarkeash\\Doorman\\": "src/"
-    }
-  },
-  "autoload-dev": {
-    "psr-4": {
-      "Clarkeash\\Doorman\\Test\\": "tests/"
-    }
-  },
-  "require-dev": {
-    "orchestra/testbench": "^10.0",
-    "phpunit/phpunit": "^11.0",
-    "mockery/mockery": "^1.4"
-  },
-  "extra": {
-    "laravel": {
-      "providers": [
-        "Clarkeash\\Doorman\\Providers\\DoormanServiceProvider"
-      ],
-      "aliases": {
-        "Doorman": "Clarkeash\\Doorman\\Facades\\Doorman"
-      }
-    }
-  },
-  "config": {
-    "preferred-install": "dist"
-  },
-  "minimum-stability": "dev",
-  "prefer-stable": true
+    "name": "clarkeash/doorman",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Ashley Clarke",
+            "email": "me@ashleyclarke.me"
+        }
+    ],
+    "require": {
+        "php": "^8.2",
+        "laravel/framework": "^12.0|^13.0",
+        "ramsey/uuid": "^4.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Clarkeash\\Doorman\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Clarkeash\\Doorman\\Test\\": "tests/"
+        }
+    },
+    "require-dev": {
+        "orchestra/testbench": "^10.0|^11.0",
+        "phpunit/phpunit": "^11.0|^12.5.12",
+        "mockery/mockery": "^1.4"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "Clarkeash\\Doorman\\Providers\\DoormanServiceProvider"
+            ],
+            "aliases": {
+                "Doorman": "Clarkeash\\Doorman\\Facades\\Doorman"
+            }
+        }
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
 }
